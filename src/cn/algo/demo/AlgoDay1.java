@@ -16,20 +16,20 @@ import java.util.Scanner;
  * 提示：
  * 0 <= num < 231
  */
-public class AlgoDay1 {
-    private static final char str[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-    private static int cnt = 0;
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
-
+class AlgoDay1 {
+    public static void main(String[] args) {
+        AlgoDay1 algoDay1 = new AlgoDay1();
+        System.out.println(algoDay1.translateNum(12258));
+    }
+    private final char str[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    private int cnt = 0;
+    public int translateNum(int num) {
         f(String.valueOf(num), "");
-        System.out.println(cnt);
+        return cnt;
     }
 
-    public static void f(String numStr, String rsStr){
+    public void f(String numStr, String rsStr){
         if(numStr.isEmpty()){
-            System.out.println(rsStr);
             cnt++;
             return;
         }
@@ -41,6 +41,9 @@ public class AlgoDay1 {
             if(i == 1){
                 t =  str[numStr.charAt(0)-'0'];
             } else if(i == 2){
+                if(numStr.charAt(0)=='0'){
+                    return;
+                }
                 t = str[Integer.parseInt((numStr.charAt(0)+""+numStr.charAt(1)))];
             }
             f(numStr.substring(i), rsStr+t);
