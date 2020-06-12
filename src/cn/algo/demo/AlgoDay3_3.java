@@ -17,36 +17,36 @@ package cn.algo.demo;
 public class AlgoDay3_3 {
     public static void main(String[] args){
         AlgoDay3_3 algo = new AlgoDay3_3();
-        System.out.println(algo.longestPalindrome("babad"));
-//        System.out.println(algo.longestPalindrome("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"));
+        long date = System.currentTimeMillis();
+//        System.out.println(algo.longestPalindrome("cbbd"));
+        System.out.println(algo.longestPalindrome("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"));
+        System.out.println(System.currentTimeMillis()-date);
     }
 
     public String longestPalindrome(String s) {
         if(s.isEmpty()) {
             return "";
         }
-        int cnt = 0;
+        if(s.length() == 1){
+            return s;
+        }
+        int a, b;
         String str = "";
         for(int i=0; i<s.length(); i++){
-            for(int j=i+1; j<=s.length(); j++){
+            for(int j=i; j<s.length(); j++){
+                a = i;
+                b = j;
                 boolean flag = true;
-                if (j-1 == 1){
-                    flag = true;
-                }
-                int b = 0, e = j-1;
-                while(b < e){
-                    if(s.charAt(b) != s.charAt(e)){
-                        flag =  false;
+                while(a<b){
+                    if(s.charAt(a) != s.charAt(b)){
+                        flag = false;
+                        break;
                     }
-                    b++;
-                    e--;
+                    a++;
+                    b--;
                 }
-                flag = true;
-                if(flag){
-                    if(j-i > cnt){
-                        cnt = j-i;
-                        str = s.substring(i, j);
-                    }
+                if(flag && j-i+1>str.length()){
+                    str = s.substring(i, j+1);
                 }
             }
         }
