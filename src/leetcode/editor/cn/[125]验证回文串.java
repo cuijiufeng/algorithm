@@ -24,13 +24,16 @@ import java.util.regex.Pattern;
 class Solution {
     public static void main(String[] args){
         Solution solu = new Solution();
-        System.out.println(solu.isPalindrome(",."));
+        System.out.println(solu.isPalindrome(".,"));
     }
     public boolean isPalindrome(String s) {
         if (s==null || s.isEmpty()){
             return true;
         }
-        if(s.matches("[a-zA-Z0-9]+")){
+        if(s.length()==1 || s.matches("[ ]*")){
+            return true;
+        }
+        if(s.matches("[^a-zA-Z0-9]+")){
             return true;
         }
         int i=0, j = s.length()-1;
