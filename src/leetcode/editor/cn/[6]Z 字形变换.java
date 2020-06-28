@@ -39,32 +39,35 @@ import java.util.Arrays;
 class Solution {
     public static void main(String[] args){
         Solution solu = new Solution();
-        solu.convert("LEETCODEISHIRING", 4);
+        System.out.println(solu.convert("ABCDE", 4));
     }
     public String convert(String s, int numRows) {
-        int group = s.length() / (numRows + numRows - 2);
-        int colCnt = s.length() % (numRows + numRows - 2)==0 ? group*(numRows-1) : group*(numRows-1)+1;
+        if(s.length()==1 || numRows==1){
+            return s;
+        }
+        int group = s.length()%(numRows + numRows - 2)==0 ? s.length()/(numRows + numRows - 2) : s.length()/(numRows + numRows - 2)+1;
+        int colCnt = group*(numRows-1);
         char[][] chars = new char[numRows][colCnt];
         int row = 0;
         int col = 0;
-        boolean flag = true;
         for (int i = 0; i < s.length(); i++) {
             chars[row][col] = s.charAt(i);
-            if((i+1)%numRows==0){
-                flag = true;
-            }
-            if((i+1)%(2*numRows-1)==0){
-                flag = false;
-            }
-            if(flag){
+            if(i%(2*numRows-2)<numRows-1){
                 row++;
             } else {
                 row--;
                 col++;
             }
         }
-        System.out.println(Arrays.toString(chars));
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for (char[] aChar : chars) {
+            for (char c : aChar) {
+                if(c != 0){
+                    sb.append(c);
+                }
+            }
+        }
+        return sb.toString();
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
