@@ -21,25 +21,46 @@
 // 👍 459 👎 0
 
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public static void main(String[] args){
         Solution solu = new Solution();
-        solu.isHappy(19);
+        System.out.println(solu.isHappy(19));
     }
     public boolean isHappy(int n) {
-        int cnt = 0, t = n, num = n;
-        while(t != 0){
-            cnt++;
-            t /= 10;
+        Map<Integer, Integer> map = new HashMap<>();
+
+        while (true) {
+            map.put(n, n);
+            int cnt = 0, t = n, num = n;
+            while(t != 0){
+                cnt++;
+                t /= 10;
+            }
+            char[] chs = new char[cnt];
+            cnt = 0;
+            while (num != 0){
+                chs[cnt++] = (char)(num % 10);
+                num /= 10;
+            }
+            n = 0;
+            for (int i = 0; i < chs.length; i++) {
+                n += chs[i]*chs[i];
+            }
+            if (n == 1){
+                return true;
+            }
+            Iterator<Integer> iterator = map.keySet().iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next() == n) {
+                    return false;
+                }
+            }
         }
-        cnt = 0;
-        char[] chs = new char[cnt];
-        while (num != 0){
-            chs[cnt] = (char)(num % 10);
-            num /= 10;
-        }
-        return false;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
