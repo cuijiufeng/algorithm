@@ -1,6 +1,4 @@
-package cn.algo.demo;
-
-import java.util.Scanner;
+package leetcode.editor.cn;
 
 /**
  * @ClassName: AlgoDay1

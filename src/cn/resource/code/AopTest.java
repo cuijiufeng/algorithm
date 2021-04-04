@@ -1,4 +1,4 @@
-package leetcode.editor.cn;
+package cn.resource.code;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

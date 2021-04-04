@@ -1,4 +1,4 @@
-package leetcode.editor.cn;
+package cn.resource.code;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;

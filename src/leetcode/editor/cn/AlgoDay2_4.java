@@ -1,4 +1,4 @@
-package cn.algo.demo;
+package leetcode.editor.cn;
 
 /**
  * @author cui

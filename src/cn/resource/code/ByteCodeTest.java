@@ -1,4 +1,4 @@
-package leetcode.editor.cn;
+package cn.resource.code;
 
 import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.MethodVisitor;

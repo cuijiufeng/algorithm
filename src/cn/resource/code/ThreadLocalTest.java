@@ -1,4 +1,4 @@
-package leetcode.editor.cn;
+package cn.resource.code;
 
 /**
  * ThreadLocal为每个线程维护变量，不对其他线程可见，

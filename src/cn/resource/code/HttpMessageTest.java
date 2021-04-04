@@ -1,4 +1,4 @@
-package leetcode.editor.cn;
+package cn.resource.code;
 
 import java.io.InputStream;
 import java.io.OutputStream;

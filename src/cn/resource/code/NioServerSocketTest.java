@@ -1,4 +1,4 @@
-package leetcode.editor.cn;
+package cn.resource.code;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
