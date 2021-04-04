@@ -28,7 +28,7 @@ import java.lang.reflect.Method;
 public class ByteCodeTest {
     public static void main(String[] args) throws Exception {
         //调用方法生成代理对象
-        HelloTest proxyObj = (HelloTest) Proxy.newProxyInstance(HelloTest.class, new InvocationHandler() {
+        HelloTestTest proxyObj = (HelloTestTest) Proxy.newProxyInstance(HelloTestTest.class, new InvocationHandler() {
             //实现回调方法
             @Override
             public void invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -184,7 +184,7 @@ class Proxy{
 /**
  * 待被增强类
  */
-class HelloTest {
+class HelloTestTest {
     public void sayHello(){
         System.out.println("hello");
     }

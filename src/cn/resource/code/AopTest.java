@@ -15,7 +15,7 @@ public class AopTest {
         //生成代理对象
         Hello proxyObj = (Hello) Proxy.newProxyInstance(
                 //类加载器，使用被代理对象类的类加载器即可
-                HelloTest.class.getClassLoader(),
+                HelloTestTest.class.getClassLoader(),
                 //被代理对象实现的接口
                 new Class[]{Hello.class},
                 //InvocationHandler
