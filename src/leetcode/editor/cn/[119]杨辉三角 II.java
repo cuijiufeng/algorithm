@@ -20,30 +20,33 @@ package leetcode.editor.cn;
 import java.util.ArrayList;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class GetRow {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<Integer> getRow(int rowIndex) {
+            List<Integer> list = new ArrayList<>();
+            list.add(1);
+            if (rowIndex == 0) {
+                return list;
+            }
+            list.add(1);
+            if (rowIndex == 1) {
+                return list;
+            }
+            for (int i = 2; i <= rowIndex; i++) {
+                list.add(1);
+                for (int j = i - 1; j > 0; j--) {
+                    Integer num = list.get(j) + list.get(j - 1);
+                    list.set(j, num);
+                }
+            }
+            return list;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new GetRow().new Solution();
         System.out.println(solu.getRow(4));
     }
-    public List<Integer> getRow(int rowIndex) {
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        if(rowIndex == 0){
-            return list;
-        }
-        list.add(1);
-        if(rowIndex == 1){
-            return list;
-        }
-        for(int i=2; i<=rowIndex; i++){
-            list.add(1);
-            for(int j=i-1; j>0; j--){
-                Integer num = list.get(j) + list.get(j - 1);
-                list.set(j, num);
-            }
-        }
-        return list;
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

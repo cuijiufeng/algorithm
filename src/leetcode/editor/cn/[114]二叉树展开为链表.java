@@ -1,4 +1,4 @@
-//给定一个二叉树，原地将它展开为一个单链表。 
+package leetcode.editor.cn;//给定一个二叉树，原地将它展开为一个单链表。
 //
 // 
 //
@@ -31,54 +31,64 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
+class Flatten {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        solu.flatten(null);
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
     }
-    public void flatten(TreeNode root) {
-        if (root == null){
-            return;
-        }
-        TreeNode t = root;
-        Stack<TreeNode> stack = new Stack<>();
-        List<TreeNode> list = new ArrayList<>();
-        while(t != null){
-            list.add(t);
-            stack.push(t);
-            t = t.left;
-        }
-        while (!stack.isEmpty()){
-            TreeNode pop = stack.pop();
-            if ((t = pop.right) != null){
-                while (t != null){
-                    list.add(t);
-                    stack.push(t);
-                    t = t.left;
+
+    class Solution {
+
+        public void flatten(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            TreeNode t = root;
+            Stack<TreeNode> stack = new Stack<>();
+            List<TreeNode> list = new ArrayList<>();
+            while (t != null) {
+                list.add(t);
+                stack.push(t);
+                t = t.left;
+            }
+            while (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                if ((t = pop.right) != null) {
+                    while (t != null) {
+                        list.add(t);
+                        stack.push(t);
+                        t = t.left;
+                    }
                 }
             }
-        }
-        t = list.get(0);
-        for (int i = 1; i < list.size(); i++) {
-            t.left = null;
-            t.right = list.get(i);
-            t = list.get(i);
+            t = list.get(0);
+            for (int i = 1; i < list.size(); i++) {
+                t.left = null;
+                t.right = list.get(i);
+                t = list.get(i);
+            }
         }
     }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new Flatten().new Solution();
+        solu.flatten(null);
+    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

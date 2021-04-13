@@ -28,28 +28,33 @@ package leetcode.editor.cn;
 // 
 // Related Topics 数组 二分查找
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int searchInsert(int[] nums, int target) {
-        int begin=0, end=nums.length-1, mid;
-        while(begin<=end){
-            mid=(begin+end)/2;
-            if(nums[mid] == target){
-                return mid;
-            } else if(nums[mid] > target){
-                end = mid-1;
-            } else if(nums[mid] < target){
-                begin = mid + 1;
+class SearchInsert {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int searchInsert(int[] nums, int target) {
+            int begin = 0, end = nums.length - 1, mid;
+            while (begin <= end) {
+                mid = (begin + end) / 2;
+                if (nums[mid] == target) {
+                    return mid;
+                } else if (nums[mid] > target) {
+                    end = mid - 1;
+                } else if (nums[mid] < target) {
+                    begin = mid + 1;
+                }
             }
+            if (begin == -1 || end == -1) {
+                return 0;
+            } else if (end == nums.length || begin == nums.length) {
+                return nums.length;
+            }
+            mid = (begin + end) / 2;
+            return mid + 1;
         }
-        if(begin==-1 || end==-1){
-            return 0;
-        } else if(end==nums.length || begin==nums.length){
-            return nums.length;
-        }
-        mid=(begin+end)/2;
-        return mid+1;
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solution = new SearchInsert().new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

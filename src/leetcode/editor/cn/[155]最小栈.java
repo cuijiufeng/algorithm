@@ -1,4 +1,4 @@
-//设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。 
+package leetcode.editor.cn;//设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
 //
 // 
 // push(x) —— 将元素 x 推入栈中。 
@@ -44,39 +44,43 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class MinStack {
-    private List<Integer> list;
 
-    /** initialize your data structure here. */
-    public MinStack() {
-        list = new ArrayList<>();
-    }
-    
-    public void push(int x) {
-        list.add(x);
-    }
-    
-    public int pop() {
-        return list.remove(list.size()-1);
-    }
-    
-    public int top() {
-        return list.get(list.size()-1);
-    }
-    
-    public int getMin() {
-        Iterator<Integer> iterator = list.iterator();
-        Integer min = iterator.next();
-        while(iterator.hasNext()){
-            Integer t = iterator.next();
-            if(t<min){
-                min = t;
-            }
+class MinStackTest {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class MinStack {
+        private List<Integer> list;
+
+        /**
+         * initialize your data structure here.
+         */
+        public MinStack() {
+            list = new ArrayList<>();
         }
-        return min;
+
+        public void push(int x) {
+            list.add(x);
+        }
+
+        public int pop() {
+            return list.remove(list.size() - 1);
+        }
+
+        public int top() {
+            return list.get(list.size() - 1);
+        }
+
+        public int getMin() {
+            Iterator<Integer> iterator = list.iterator();
+            Integer min = iterator.next();
+            while (iterator.hasNext()) {
+                Integer t = iterator.next();
+                if (t < min) {
+                    min = t;
+                }
+            }
+            return min;
+        }
     }
-}
 
 /**
  * Your MinStack object will be instantiated and called as such:
@@ -87,3 +91,4 @@ class MinStack {
  * int param_4 = obj.getMin();
  */
 //leetcode submit region end(Prohibit modification and deletion)
+}

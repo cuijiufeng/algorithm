@@ -37,23 +37,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        TreeNode t1 = new TreeNode(10);
-        TreeNode t2 = new TreeNode(5);
-        TreeNode t3 = new TreeNode(15);
-        TreeNode t4 = new TreeNode(6);
-        TreeNode t5 = new TreeNode(20);
+class IsValidBST {
+    public static void main(String[] args) {
+        IsValidBST isValidBST = new IsValidBST();
+        Solution solu = isValidBST.new Solution();
+        TreeNode t1 = isValidBST.new TreeNode(10);
+        TreeNode t2 = isValidBST.new TreeNode(5);
+        TreeNode t3 = isValidBST.new TreeNode(15);
+        TreeNode t4 = isValidBST.new TreeNode(6);
+        TreeNode t5 = isValidBST.new TreeNode(20);
         t1.left = t2;
         t1.right = t3;
         t3.left = t4;
@@ -61,35 +53,52 @@ class Solution {
         System.out.println(solu.isValidBST(t1));
     }
 
-    //如果中序遍历是升序的，则是搜索二叉树
-    public boolean isValidBST(TreeNode root) {
-        if (root == null){
-            return true;
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
-        //中序非递归遍历
-        Stack<TreeNode> stack = new Stack<>();
-        List<TreeNode> traverse = new ArrayList<>();
-        while (root != null){
-            stack.push(root);
-            root = root.left;
-        }
-        while (!stack.isEmpty()){
-            TreeNode pop = stack.pop();
-            traverse.add(pop);
-            if (pop.right != null){
-                TreeNode t = pop.right;
-                while (t != null){
-                    stack.push(t);
-                    t = t.left;
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+
+        //如果中序遍历是升序的，则是搜索二叉树
+        public boolean isValidBST(TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+            //中序非递归遍历
+            Stack<TreeNode> stack = new Stack<>();
+            List<TreeNode> traverse = new ArrayList<>();
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            while (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                traverse.add(pop);
+                if (pop.right != null) {
+                    TreeNode t = pop.right;
+                    while (t != null) {
+                        stack.push(t);
+                        t = t.left;
+                    }
                 }
             }
-        }
-        for (int i = 1; i < traverse.size(); i++) {
-            if (traverse.get(i-1).val >= traverse.get(i).val){
-                return false;
+            for (int i = 1; i < traverse.size(); i++) {
+                if (traverse.get(i - 1).val >= traverse.get(i).val) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}
+

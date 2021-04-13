@@ -1,4 +1,4 @@
-//给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。 
+package leetcode.editor.cn;//给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
 //
 // 
 //
@@ -21,23 +21,30 @@
 import java.util.ArrayList;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> list = new ArrayList<>();
-        for(int i=0; i<numRows; i++){
-            List<Integer> l = new ArrayList<>(i+1);
-            for(int j=0; j<i+1; j++){
-                if(j==0 || j==i){
-                    l.add(1);
-                } else {
-                    Integer num = list.get(i-1).get(j)+list.get(i-1).get(j-1);
-                    l.add(num);
+class Generate {
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<List<Integer>> generate(int numRows) {
+            List<List<Integer>> list = new ArrayList<>();
+            for (int i = 0; i < numRows; i++) {
+                List<Integer> l = new ArrayList<>(i + 1);
+                for (int j = 0; j < i + 1; j++) {
+                    if (j == 0 || j == i) {
+                        l.add(1);
+                    } else {
+                        Integer num = list.get(i - 1).get(j) + list.get(i - 1).get(j - 1);
+                        l.add(num);
+                    }
                 }
+                list.add(l);
             }
-            list.add(l);
+            return list;
         }
-        return list;
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solution = new Generate().new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

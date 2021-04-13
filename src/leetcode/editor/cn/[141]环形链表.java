@@ -42,40 +42,47 @@ package leetcode.editor.cn;
 import java.util.ArrayList;
 import java.util.List;
 
-//Definition for singly-linked list.
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-}
+class HasCycle {
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        ListNode ln1 = new ListNode(1);
-        ListNode ln2 = new ListNode(2);
+    //Definition for singly-linked list.
+    class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public boolean hasCycle(ListNode head) {
+            if (head == null) {
+                return false;
+            }
+            List<ListNode> list = new ArrayList<>();
+            ListNode ln = head;
+            while (ln.next != null) {
+                if (list.contains(ln)) {
+                    return true;
+                }
+                list.add(ln);
+                ln = ln.next;
+            }
+            return false;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        HasCycle hasCycle = new HasCycle();
+        Solution solu =hasCycle. new Solution();
+        ListNode ln1 = hasCycle.new ListNode(1);
+        ListNode ln2 = hasCycle.new ListNode(2);
         ln1.next = ln2;
         ln2.next = ln1;
         System.out.println(solu.hasCycle(ln1));
     }
-    public boolean hasCycle(ListNode head) {
-        if (head == null){
-            return false;
-        }
-        List<ListNode> list = new ArrayList<>();
-        ListNode ln = head;
-        while(ln.next!=null){
-            if(list.contains(ln)){
-                return true;
-            }
-            list.add(ln);
-            ln = ln.next;
-        }
-        return false;
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

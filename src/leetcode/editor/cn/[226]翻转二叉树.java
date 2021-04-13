@@ -25,33 +25,43 @@ package leetcode.editor.cn;
 // 谷歌：我们90％的工程师使用您编写的软件(Homebrew)，但是您却无法在面试时在白板上写出翻转二叉树这道题，这太糟糕了。 
 // Related Topics 树
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+class InvertTree {
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public TreeNode invertTree(TreeNode root) {
-        if (root == null || (root.left == null && root.right == null)){
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public TreeNode invertTree(TreeNode root) {
+            if (root == null || (root.left == null && root.right == null)) {
+                return root;
+            }
+            f(root);
             return root;
         }
-        f(root);
-        return root;
+
+        public void f(TreeNode root) {
+            if (root.left == null && root.right == null) {
+                return;
+            }
+            TreeNode t = root.left;
+            root.left = root.right;
+            root.right = t;
+            invertTree(root.left);
+            invertTree(root.right);
+        }
     }
 
-    public void f(TreeNode root){
-        if (root.left == null && root.right == null){
-            return;
-        }
-        TreeNode t = root.left;
-        root.left = root.right;
-        root.right = t;
-        invertTree(root.left);
-        invertTree(root.right);
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        InvertTree invertTree = new InvertTree();
+        Solution solution = invertTree.new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

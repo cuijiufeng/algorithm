@@ -41,84 +41,86 @@ import java.util.Stack;
 
 // This is the interface that allows for creating nested lists.
 // You should not implement it, or speculate about its implementation
-//class NestedInteger {
-//    private Integer num = null;
-//    private List<NestedInteger> list = new ArrayList<>();
-//    // Constructor initializes an empty nested list.
-//    public NestedInteger(){}
-//
-//    // Constructor initializes a single integer.
-//    public NestedInteger(int value){num = value;}
-//
-//    // @return true if this NestedInteger holds a single integer, rather than a nested list.
-//    public boolean isInteger(){return num != null;}
-//
-//    // @return the single integer that this NestedInteger holds, if it holds a single integer
-//    // Return null if this NestedInteger holds a nested list
-//    public Integer getInteger(){return num;}
-//
-//    // Set this NestedInteger to hold a single integer.
-//    public void setInteger(int value){this.num = value;}
-//
-//    // Set this NestedInteger to hold a nested list and adds a nested integer to it.
-//    public void add(NestedInteger ni){list.add(ni);}
-//
-//    // @return the nested list that this NestedInteger holds, if it holds a nested list
-//    // Return null if this NestedInteger holds a single integer
-//    public List<NestedInteger> getList(){return list;}
-//}
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Deserialize{
     public static void main(String[] args){
-        Solution solu = new Solution();
+        Solution solu = new Deserialize1().new Solution();
         solu.deserialize("[123,456,[788,799,833],[[]],10,[]]");
     }
-    public NestedInteger deserialize(String s) {
-        if (s == null || s.isEmpty()){
-            return new NestedInteger();
-        }
-        if(s.matches("[-0-9]*")){
-            return new NestedInteger(Integer.parseInt(s));
-        }
-        int numCount = 0;
-        boolean flag = false;
-        boolean isNega = false;
-        Stack<NestedInteger> stack = new Stack<NestedInteger>();
-        stack.push(new NestedInteger());
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '[') {
-                flag = false;
-                stack.push(new NestedInteger());
-                numCount = 0;
-            } else if (s.charAt(i) == ']') {
-                if (flag){
-                    int num = isNega ? -1*Integer.parseInt(s.substring(i - numCount, i)): Integer.parseInt(s.substring(i - numCount, i));
-                    stack.peek().add(new NestedInteger(num));
-                }
-                numCount = 0;
-                NestedInteger t = stack.pop();
-                stack.peek().add(t);
-                flag = false;
-                isNega = false;
-            } else if (s.charAt(i) == '-') {
-                flag = false;
-                isNega = true;
-                numCount = 0;
-            } else if (s.charAt(i) == ',') {
-                if(flag){
-                    int num = isNega ? -1*Integer.parseInt(s.substring(i - numCount, i)): Integer.parseInt(s.substring(i - numCount, i));
-                    stack.peek().add(new NestedInteger(num));
-                    isNega = false;
-                }
-                numCount = 0;
-                flag = false;
-            } else if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
-                flag = true;
-                numCount++;
-            }
-        }
-        return stack.pop().getList().get(0);
+    class NestedInteger {
+        private Integer num = null;
+        private List<NestedInteger> list = new ArrayList<>();
+        // Constructor initializes an empty nested list.
+        public NestedInteger(){}
+
+        // Constructor initializes a single integer.
+        public NestedInteger(int value){num = value;}
+
+        // @return true if this NestedInteger holds a single integer, rather than a nested list.
+        public boolean isInteger(){return num != null;}
+
+        // @return the single integer that this NestedInteger holds, if it holds a single integer
+        // Return null if this NestedInteger holds a nested list
+        public Integer getInteger(){return num;}
+
+        // Set this NestedInteger to hold a single integer.
+        public void setInteger(int value){this.num = value;}
+
+        // Set this NestedInteger to hold a nested list and adds a nested integer to it.
+        public void add(NestedInteger ni){list.add(ni);}
+
+        // @return the nested list that this NestedInteger holds, if it holds a nested list
+        // Return null if this NestedInteger holds a single integer
+        public List<NestedInteger> getList(){return list;}
     }
-}
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public NestedInteger deserialize(String s) {
+            if (s == null || s.isEmpty()){
+                return new NestedInteger();
+            }
+            if(s.matches("[-0-9]*")){
+                return new NestedInteger(Integer.parseInt(s));
+            }
+            int numCount = 0;
+            boolean flag = false;
+            boolean isNega = false;
+            Stack<NestedInteger> stack = new Stack<NestedInteger>();
+            stack.push(new NestedInteger());
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '[') {
+                    flag = false;
+                    stack.push(new NestedInteger());
+                    numCount = 0;
+                } else if (s.charAt(i) == ']') {
+                    if (flag){
+                        int num = isNega ? -1*Integer.parseInt(s.substring(i - numCount, i)): Integer.parseInt(s.substring(i - numCount, i));
+                        stack.peek().add(new NestedInteger(num));
+                    }
+                    numCount = 0;
+                    NestedInteger t = stack.pop();
+                    stack.peek().add(t);
+                    flag = false;
+                    isNega = false;
+                } else if (s.charAt(i) == '-') {
+                    flag = false;
+                    isNega = true;
+                    numCount = 0;
+                } else if (s.charAt(i) == ',') {
+                    if(flag){
+                        int num = isNega ? -1*Integer.parseInt(s.substring(i - numCount, i)): Integer.parseInt(s.substring(i - numCount, i));
+                        stack.peek().add(new NestedInteger(num));
+                        isNega = false;
+                    }
+                    numCount = 0;
+                    flag = false;
+                } else if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                    flag = true;
+                    numCount++;
+                }
+            }
+            return stack.pop().getList().get(0);
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
+}

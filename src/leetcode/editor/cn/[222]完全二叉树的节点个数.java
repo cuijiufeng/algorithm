@@ -19,21 +19,32 @@ package leetcode.editor.cn;
 // Related Topics 树 二分查找
 
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+class CountNodes {
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int countNodes(TreeNode root) {
-        if (root == null){
-            return 0;
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
-        return countNodes(root.left) + countNodes(root.right) + 1;
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int countNodes(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            return countNodes(root.left) + countNodes(root.right) + 1;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        CountNodes countNodes = new CountNodes();
+        Solution solution = countNodes.new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

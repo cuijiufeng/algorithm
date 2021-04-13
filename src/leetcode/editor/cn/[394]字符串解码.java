@@ -1,4 +1,4 @@
-//给定一个经过编码的字符串，返回它解码后的字符串。 
+package leetcode.editor.cn;//给定一个经过编码的字符串，返回它解码后的字符串。
 //
 // 编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。 
 //
@@ -36,37 +36,38 @@
 
 
 import java.util.Stack;
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class DecodeString{
     public static void main(String[] args){
-        Solution solu = new Solution();
+        Solution solu = new DecodeString().new Solution();
         System.out.println(solu.decodeString("3[a2[c]]"));//3[a]2[bc]3[a2[c]]
     }
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String decodeString(String s) {
+            int cnt = 0;
+            Stack<int[]> stack = new Stack<>();
+            StringBuilder sb = new StringBuilder();
 
-    public String decodeString(String s) {
-        int cnt = 0;
-        Stack<int[]> stack = new Stack<>();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) >= '0' && s.charAt(i) <= '9'){
-                cnt = cnt * 10 + s.charAt(i) - '0';
-            } else if (s.charAt(i) == '['){
-                stack.push(new int[]{cnt, i+1});
-                cnt = 0;
-            } else if (s.charAt(i) == ']'){
-                int[] pop = stack.pop();
-                String str = decodeString(s.substring(pop[1], i));
-                for (int j = 0; j < pop[0]-1; j++) {
-                    sb.append(str);
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) >= '0' && s.charAt(i) <= '9'){
+                    cnt = cnt * 10 + s.charAt(i) - '0';
+                } else if (s.charAt(i) == '['){
+                    stack.push(new int[]{cnt, i+1});
+                    cnt = 0;
+                } else if (s.charAt(i) == ']'){
+                    int[] pop = stack.pop();
+                    String str = decodeString(s.substring(pop[1], i));
+                    for (int j = 0; j < pop[0]-1; j++) {
+                        sb.append(str);
+                    }
+                    cnt = 0;
+                } else if (s.charAt(i) >= 'a' && s.charAt(i) <= 'z' || s.charAt(i) >= 'A' && s.charAt(i) <= 'Z'){
+                    sb.append(s.charAt(i));
                 }
-                cnt = 0;
-            } else if (s.charAt(i) >= 'a' && s.charAt(i) <= 'z' || s.charAt(i) >= 'A' && s.charAt(i) <= 'Z'){
-                sb.append(s.charAt(i));
             }
+            return sb.toString();
         }
-        return sb.toString();
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+
+}

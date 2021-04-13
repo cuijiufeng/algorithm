@@ -21,34 +21,41 @@ package leetcode.editor.cn;
 import java.util.HashMap;
 import java.util.Map;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int singleNumber1(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for(int i=0; i<nums.length; i++){
-            map.put(nums[i], map.get(nums[i])==null?1:map.get(nums[i])+1);
-        }
-        for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
-            if (integerIntegerEntry.getValue()==1) {
-                return integerIntegerEntry.getKey();
+class SingleNumber {
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int singleNumber1(int[] nums) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                map.put(nums[i], map.get(nums[i]) == null ? 1 : map.get(nums[i]) + 1);
             }
+            for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
+                if (integerIntegerEntry.getValue() == 1) {
+                    return integerIntegerEntry.getKey();
+                }
+            }
+            return 0;
         }
-        return 0;
+
+        /**
+         * @param nums
+         * @return int
+         * @throws
+         * @Desc: 所有的数字都出现过两次，只有一个数字出现过一次。a^b^b=a,a^b^c^b^c=a;所以可以如下解法
+         * @Date: 2020/6/22 10:06
+         */
+        public int singleNumber(int[] nums) {
+            int num = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                num = num ^ nums[i];
+            }
+            return num;
+        }
     }
 
-    /**
-     * @Desc: 所有的数字都出现过两次，只有一个数字出现过一次。a^b^b=a,a^b^c^b^c=a;所以可以如下解法
-     * @Date: 2020/6/22 10:06
-     * @param nums
-     * @return int
-     * @throws
-     */
-    public int singleNumber(int[] nums) {
-        int num = nums[0];
-        for (int i=1; i<nums.length; i++){
-            num = num^nums[i];
-        }
-        return num;
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

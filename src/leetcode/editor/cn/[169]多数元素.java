@@ -17,34 +17,36 @@ package leetcode.editor.cn;
 // 
 // Related Topics 位运算 数组 分治算法
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class MajorityElement {
+    public static void main(String[] args) {
+        Solution solu = new MajorityElement().new Solution();
         System.out.println(solu.majorityElement(new int[]{3, 2, 3}));
     }
 
-    public int majorityElement(int[] nums) {
-        //票项
-        int ballot = nums[0];
-        //票数
-        int ballotCount = 1;
-        //投票法，如果相同票数加一，如果不同票数减一(票数为0时，切换票项并且初始化票数)
-        for (int i = 1; i < nums.length; i++) {
-            //如果相同，则票数加一
-            if (nums[i] == ballot){
-                ballotCount++;
-            } else {
-                //如果不同，则票数减一
-                ballotCount--;
-                if (ballotCount == 0){
-                    ballot = nums[i];
-                    ballotCount = 1;
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int majorityElement(int[] nums) {
+            //票项
+            int ballot = nums[0];
+            //票数
+            int ballotCount = 1;
+            //投票法，如果相同票数加一，如果不同票数减一(票数为0时，切换票项并且初始化票数)
+            for (int i = 1; i < nums.length; i++) {
+                //如果相同，则票数加一
+                if (nums[i] == ballot) {
+                    ballotCount++;
+                } else {
+                    //如果不同，则票数减一
+                    ballotCount--;
+                    if (ballotCount == 0) {
+                        ballot = nums[i];
+                        ballotCount = 1;
+                    }
                 }
             }
+            return ballot;
         }
-        return ballot;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+
+}

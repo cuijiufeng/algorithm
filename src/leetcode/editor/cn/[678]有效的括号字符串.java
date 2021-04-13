@@ -1,4 +1,4 @@
-//给定一个只包含三种字符的字符串：（ ，） 和 *，写一个函数来检验这个字符串是否为有效字符串。有效字符串具有如下规则： 
+package leetcode.editor.cn;//给定一个只包含三种字符的字符串：（ ，） 和 *，写一个函数来检验这个字符串是否为有效字符串。有效字符串具有如下规则：
 //
 // 
 // 任何左括号 ( 必须有相应的右括号 )。 
@@ -38,31 +38,33 @@
 // 👍 144 👎 0
 
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class CheckValidString{
     public static void main(String[] args){
-        Solution solu = new Solution();
+        Solution solu = new CheckValidString().new Solution();
         System.out.println(solu.checkValidString("(*))"));
     }
-    public boolean checkValidString(String s) {
-        return f(s.toCharArray(), 0, 0);
-    }
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean checkValidString(String s) {
+            return f(s.toCharArray(), 0, 0);
+        }
 
-    public boolean f(char[] arr, int pos, int balance){
-        if (balance<0){
+        public boolean f(char[] arr, int pos, int balance){
+            if (balance<0){
+                return false;
+            }
+            if (pos == arr.length){
+                return balance == 0;
+            }
+            if (arr[pos] == '('){
+                return f(arr, pos+1, balance+1);
+            } else if (arr[pos] == ')'){
+                return f(arr, pos+1, balance-1);
+            } else if (arr[pos] == '*') {
+                return f(arr, pos+1, balance+1) || f(arr, pos+1, balance-1) || f(arr, pos+1, balance);
+            }
             return false;
         }
-        if (pos == arr.length){
-            return balance == 0;
-        }
-        if (arr[pos] == '('){
-            return f(arr, pos+1, balance+1);
-        } else if (arr[pos] == ')'){
-            return f(arr, pos+1, balance-1);
-        } else if (arr[pos] == '*') {
-            return f(arr, pos+1, balance+1) || f(arr, pos+1, balance-1) || f(arr, pos+1, balance);
-        }
-        return false;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}

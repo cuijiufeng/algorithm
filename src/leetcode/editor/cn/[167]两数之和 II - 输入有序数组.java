@@ -1,4 +1,4 @@
-//给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。 
+package leetcode.editor.cn;//给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。
 //
 // 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。 
 //
@@ -17,21 +17,28 @@
 // Related Topics 数组 双指针 二分查找
 
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] twoSum(int[] numbers, int target) {
-        int b = 0;
-        int e = numbers.length - 1;
-        while (b < e){
-            if (numbers[b] + numbers[e] > target){
-                e--;
-            } else if (numbers[b] + numbers[e] < target){
-                b++;
-            } else if (numbers[b] + numbers[e] == target){
-                return new int[]{b+1 , e+1};
+class TwoSum {
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[] twoSum(int[] numbers, int target) {
+            int b = 0;
+            int e = numbers.length - 1;
+            while (b < e) {
+                if (numbers[b] + numbers[e] > target) {
+                    e--;
+                } else if (numbers[b] + numbers[e] < target) {
+                    b++;
+                } else if (numbers[b] + numbers[e] == target) {
+                    return new int[]{b + 1, e + 1};
+                }
             }
+            return new int[2];
         }
-        return new int[2];
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solution = new TwoSum().new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

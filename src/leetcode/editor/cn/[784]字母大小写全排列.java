@@ -24,34 +24,36 @@ package leetcode.editor.cn;
 import java.util.ArrayList;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class LetterCasePermutation{
     public static void main(String[] args){
-        Solution solu = new Solution();
+        Solution solu = new LetterCasePermutation().new Solution();
         System.out.println(solu.letterCasePermutation("a1b2"));
     }
-    public List<String> letterCasePermutation(String S) {
-        List<String> list = new ArrayList<>();
-        f(S.toCharArray(), 0, list);
-        return list;
-    }
-    public void f(char[] chs, int pos, List<String> list){
-        if (pos == chs.length){
-            list.add(String.valueOf(chs));
-            return;
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<String> letterCasePermutation(String S) {
+            List<String> list = new ArrayList<>();
+            f(S.toCharArray(), 0, list);
+            return list;
         }
-        if ((chs[pos] & 0x40) != 0){
-            for (int i = 0; i < 2; i++) {
-                if ((chs[pos] & 0x20) == 0) {
-                    chs[pos] |= 0x20;
-                } else {
-                    chs[pos] &= 0xdf;
+        public void f(char[] chs, int pos, List<String> list){
+            if (pos == chs.length){
+                list.add(String.valueOf(chs));
+                return;
+            }
+            if ((chs[pos] & 0x40) != 0){
+                for (int i = 0; i < 2; i++) {
+                    if ((chs[pos] & 0x20) == 0) {
+                        chs[pos] |= 0x20;
+                    } else {
+                        chs[pos] &= 0xdf;
+                    }
+                    f(chs, pos+1, list);
                 }
+            } else {
                 f(chs, pos+1, list);
             }
-        } else {
-            f(chs, pos+1, list);
         }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}

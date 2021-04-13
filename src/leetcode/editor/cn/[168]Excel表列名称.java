@@ -32,30 +32,34 @@
 // Related Topics 数学
 package leetcode.editor.cn;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class ConvertToTitle {
+    public static void main(String[] args) {
+        Solution solu = new ConvertToTitle().new Solution();
         System.out.println(solu.convertToTitle(65535));
     }
-    public String convertToTitle(int n) {
-        if (n == 0){
-            return "A";
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public String convertToTitle(int n) {
+            if (n == 0) {
+                return "A";
+            }
+            StringBuilder sb = new StringBuilder();
+            char[] chs = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+            while (n != 0) {
+                sb.append(chs[(n - 1) % 26]);
+                n = (n - 1) / 26;
+            }
+            char[] chars = sb.toString().toCharArray();
+            int b = 0, e = chars.length - 1;
+            while (b < e) {
+                char t = chars[b];
+                chars[b++] = chars[e];
+                chars[e--] = t;
+            }
+            return new String(chars);
         }
-        StringBuilder sb = new StringBuilder();
-        char[] chs = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-        while (n != 0){
-            sb.append(chs[(n-1)%26]);
-            n = (n-1)/26;
-        }
-        char[] chars = sb.toString().toCharArray();
-        int b = 0, e = chars.length-1;
-        while (b < e){
-            char t = chars[b];
-            chars[b++] = chars[e];
-            chars[e--] = t;
-        }
-        return new String(chars);
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}

@@ -26,36 +26,42 @@ package leetcode.editor.cn;
 // 
 // Related Topics 数学 字符串
 
+class AddBinary {
+    public static void main(String[] args) {
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String addBinary(String a, String b) {
-        StringBuilder sb = new StringBuilder();
-        int pa = a.length()-1, pb = b.length()-1;
-        int y = 0;
-        while(pa>=0 && pb>=0){
-            int sum = Integer.parseInt(String.valueOf(a.charAt(pa)))+Integer.parseInt(String.valueOf(b.charAt(pb)))+y;
-            y = sum / 2;
-            sb.append(sum%2);
-            pa--;
-            pb--;
-        }
-        while(pa>=0){
-            int sum = Integer.parseInt(String.valueOf(a.charAt(pa)))+y;
-            y = sum / 2;
-            sb.append(sum%2);
-            pa--;
-        }
-        while(pb>=0){
-            int sum = Integer.parseInt(String.valueOf(b.charAt(pb)))+y;
-            y = sum / 2;
-            sb.append(sum%2);
-            pb--;
-        }
-        if(y!=0){
-            sb.append(1);
-        }
-        return sb.reverse().toString();
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String addBinary(String a, String b) {
+            StringBuilder sb = new StringBuilder();
+            int pa = a.length() - 1, pb = b.length() - 1;
+            int y = 0;
+            while (pa >= 0 && pb >= 0) {
+                int sum = Integer.parseInt(String.valueOf(a.charAt(pa))) + Integer.parseInt(String.valueOf(b.charAt(pb))) + y;
+                y = sum / 2;
+                sb.append(sum % 2);
+                pa--;
+                pb--;
+            }
+            while (pa >= 0) {
+                int sum = Integer.parseInt(String.valueOf(a.charAt(pa))) + y;
+                y = sum / 2;
+                sb.append(sum % 2);
+                pa--;
+            }
+            while (pb >= 0) {
+                int sum = Integer.parseInt(String.valueOf(b.charAt(pb))) + y;
+                y = sum / 2;
+                sb.append(sum % 2);
+                pb--;
+            }
+            if (y != 0) {
+                sb.append(1);
+            }
+            return sb.reverse().toString();
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
+}
+

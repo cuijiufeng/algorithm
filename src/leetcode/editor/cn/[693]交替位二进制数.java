@@ -1,4 +1,4 @@
-//给定一个正整数，检查他是否为交替位二进制数：换句话说，就是他的二进制数相邻的两个位数永不相等。
+package leetcode.editor.cn;//给定一个正整数，检查他是否为交替位二进制数：换句话说，就是他的二进制数相邻的两个位数永不相等。
 //
 // 示例 1: 
 //
@@ -38,24 +38,26 @@
 // Related Topics 位运算 
 // 👍 74 👎 0
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class HasAlternatingBits{
     public static void main(String[] args){
-        Solution solu = new Solution();
+        Solution solu = new HasAlternatingBits().new Solution();
         System.out.println(solu.hasAlternatingBits(5));
     }
-    public boolean hasAlternatingBits(int n) {
-        int t = n & 1;
-        n >>= 1;
-        while (n != 0){
-            if ((n & 1) == t) {
-                return false;
-            }
-            t = n & 1;
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean hasAlternatingBits(int n) {
+            int t = n & 1;
             n >>= 1;
+            while (n != 0){
+                if ((n & 1) == t) {
+                    return false;
+                }
+                t = n & 1;
+                n >>= 1;
+            }
+            return true;
         }
-        return true;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+
+}

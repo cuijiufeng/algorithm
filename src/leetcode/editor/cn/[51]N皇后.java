@@ -23,79 +23,87 @@ package leetcode.editor.cn;
 // 
 // Related Topics 回溯算法 
 // 👍 482 👎 0
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class SolveNQueens {
+    public static void main(String[] args) {
+        Solution solu = new SolveNQueens().new Solution();
         System.out.println(solu.solveNQueens(4));
     }
-    public List<List<String>> solveNQueens(int n) {
-        List<List<String>> rs = new ArrayList<>();
-        char[][] chars = new char[n][n];
-        for (int i = 0; i < n; i++) {
-            Arrays.fill(chars[i], '.');
-        }
-        f(rs, n, chars, 0);
-        return rs;
-    }
-    public void f(List<List<String>> rs, int n, char[][] flag, int pos){
-        if (pos == n){
-            List<String> t = new ArrayList<>();
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public List<List<String>> solveNQueens(int n) {
+            List<List<String>> rs = new ArrayList<>();
+            char[][] chars = new char[n][n];
             for (int i = 0; i < n; i++) {
-                t.add(new String(flag[i]));
+                Arrays.fill(chars[i], '.');
             }
-            rs.add(t);
-            return;
+            f(rs, n, chars, 0);
+            return rs;
         }
-        for (int j = 0; j < n; j++) {
-            if(verify(flag, pos, j)){
-                flag[pos][j] = 'Q';
-                f(rs, n, flag, pos+1);
-                flag[pos][j] = '.';
+
+        public void f(List<List<String>> rs, int n, char[][] flag, int pos) {
+            if (pos == n) {
+                List<String> t = new ArrayList<>();
+                for (int i = 0; i < n; i++) {
+                    t.add(new String(flag[i]));
+                }
+                rs.add(t);
+                return;
             }
+            for (int j = 0; j < n; j++) {
+                if (verify(flag, pos, j)) {
+                    flag[pos][j] = 'Q';
+                    f(rs, n, flag, pos + 1);
+                    flag[pos][j] = '.';
+                }
+            }
+        }
+
+        public boolean verify(char[][] flag, int x, int y) {
+            for (int i = 0; i < flag.length; i++) {
+                if (flag[x][i] == 'Q') {
+                    return false;
+                }
+                if (flag[i][y] == 'Q') {
+                    return false;
+                }
+            }
+            int i = x, j = y;
+            while (i >= 0 && j >= 0) {
+                if (flag[i--][j--] == 'Q') {
+                    return false;
+                }
+            }
+            i = x;
+            j = y;
+            while (i < flag.length && j < flag.length) {
+                if (flag[i++][j++] == 'Q') {
+                    return false;
+                }
+            }
+            i = x;
+            j = y;
+            while (i >= 0 && j < flag.length) {
+                if (flag[i--][j++] == 'Q') {
+                    return false;
+                }
+            }
+            i = x;
+            j = y;
+            while (i < flag.length && j > 0) {
+                if (flag[i++][j--] == 'Q') {
+                    return false;
+                }
+            }
+            return true;
         }
     }
-    public boolean verify(char[][] flag, int x, int y){
-        for (int i = 0; i < flag.length; i++) {
-            if (flag[x][i] == 'Q'){
-                return false;
-            }
-            if(flag[i][y] == 'Q'){
-                return false;
-            }
-        }
-        int i = x, j = y;
-        while(i>=0 && j>=0){
-            if(flag[i--][j--] == 'Q'){
-                return false;
-            }
-        }
-        i = x;
-        j = y;
-        while(i<flag.length && j<flag.length){
-            if(flag[i++][j++] == 'Q'){
-                return false;
-            }
-        }
-        i = x;
-        j = y;
-        while (i>=0 && j<flag.length){
-            if(flag[i--][j++] == 'Q'){
-                return false;
-            }
-        }
-        i = x;
-        j = y;
-        while (i<flag.length && j>0){
-            if(flag[i++][j--] == 'Q'){
-                return false;
-            }
-        }
-        return true;
-    }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}
+

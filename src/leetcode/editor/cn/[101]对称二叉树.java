@@ -30,29 +30,42 @@ package leetcode.editor.cn;
 //
 // 你可以运用递归和迭代两种方法解决这个问题吗？ 
 // Related Topics 树 深度优先搜索 广度优先搜索
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
+
+class IsSymmetric {
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
 //Definition for a binary tree node.
-}
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean isSymmetric(TreeNode root) {
-        if(root == null){
-            return true;
-        }
-        return isSymmetric(root.left, root.right);
     }
-    public boolean isSymmetric(TreeNode left, TreeNode right){
-        if(left==null && right==null){
-            return true;
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean isSymmetric(TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+            return isSymmetric(root.left, root.right);
         }
-        if(left==null&&right!=null || left!=null&&right==null || left.val!=right.val){
-            return false;
+
+        public boolean isSymmetric(TreeNode left, TreeNode right) {
+            if (left == null && right == null) {
+                return true;
+            }
+            if (left == null && right != null || left != null && right == null || left.val != right.val) {
+                return false;
+            }
+            return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
         }
-        return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        IsSymmetric isSymmetric = new IsSymmetric();
+        Solution solution = isSymmetric.new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

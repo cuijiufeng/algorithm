@@ -1,4 +1,4 @@
-//给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。 
+package leetcode.editor.cn;//给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
 //
 // 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。 
 //
@@ -47,20 +47,26 @@
 // 
 // Related Topics 数组 双指针
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int removeElement(int[] nums, int val) {
-        if(nums.length<1){
-            return nums.length;
-        }
-        int len = 0;
-        for(int i=0; i<nums.length; i++){
-            if(nums[i] != val){
-                nums[len++] = nums[i];
+class RemoveElement {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int removeElement(int[] nums, int val) {
+            if (nums.length < 1) {
+                return nums.length;
             }
+            int len = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] != val) {
+                    nums[len++] = nums[i];
+                }
+            }
+            return len;
         }
-        return len;
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solution = new RemoveElement().new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+

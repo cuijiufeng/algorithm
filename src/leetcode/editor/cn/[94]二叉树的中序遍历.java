@@ -20,21 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        TreeNode t1 = new TreeNode(1);
-        TreeNode t2 = new TreeNode(2);
-        TreeNode t3 = new TreeNode(3);
+class InorderTraversal {
+    public static void main(String[] args) {
+        InorderTraversal inorderTraversal = new InorderTraversal();
+        Solution solu = inorderTraversal.new Solution();
+        TreeNode t1 = inorderTraversal.new TreeNode(1);
+        TreeNode t2 = inorderTraversal.new TreeNode(2);
+        TreeNode t3 = inorderTraversal.new TreeNode(3);
         t1.left = null;
         t1.right = t2;
         t2.left = t3;
@@ -44,26 +36,42 @@ class Solution {
         System.out.println(solu.inorderTraversal(t1).toString());
     }
 
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode t = root;
-        while (t != null){
-            stack.push(t);
-            t = t.left;
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
-        while (!stack.isEmpty()) {
-            TreeNode pop = stack.pop();
-            list.add(pop.val);
-            if(pop.right != null){
-                t = pop.right;
-                while (t != null){
-                    stack.push(t);
-                    t = t.left;
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public List<Integer> inorderTraversal(TreeNode root) {
+            List<Integer> list = new ArrayList<>();
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode t = root;
+            while (t != null) {
+                stack.push(t);
+                t = t.left;
+            }
+            while (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                list.add(pop.val);
+                if (pop.right != null) {
+                    t = pop.right;
+                    while (t != null) {
+                        stack.push(t);
+                        t = t.left;
+                    }
                 }
             }
+            return list;
         }
-        return list;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}
+

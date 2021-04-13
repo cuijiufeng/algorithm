@@ -60,43 +60,45 @@ package leetcode.editor.cn;
 // 
 // Related Topics 数学 字符串
 
+class MyAtoi {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int myAtoi(String str) {
+            if (!str.matches("[0-9-+ ].*") || str.matches("\\s*") || str.matches("[-+]+")) {
+                return 0;
+            }
+            String s = str.trim();
+            boolean flag = false;
+            int i = 0;
+            int rs = 0;
+            if (s.charAt(0) == '-') {
+                flag = true;
+                i++;
+            } else if (s.charAt(0) == '+') {
+                flag = false;
+                i++;
+            }
+            while (i < s.length()) {
+                if (s.charAt(i) == '.') {
+                    return flag ? -rs : rs;
+                } else if (s.charAt(i) > '9' || s.charAt(i) < '0') {
+                    return flag ? -rs : rs;
+                }
+                int t = s.charAt(i++) - '0';
+                if (rs > Integer.MAX_VALUE / 10) {
+                    return flag ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+                } else if (rs == Integer.MAX_VALUE / 10 && t > 7) {
+                    return flag ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+                }
+                rs = rs * 10 + t;
+            }
+            return flag ? -rs : rs;
+        }
+    }
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new MyAtoi().new Solution();
         System.out.println(solu.myAtoi("-5-"));
     }
-    public int myAtoi(String str) {
-        if(!str.matches("[0-9-+ ].*") || str.matches("\\s*") || str.matches("[-+]+")){
-            return 0;
-        }
-        String s = str.trim();
-        boolean flag = false;
-        int i = 0;
-        int rs = 0;
-        if(s.charAt(0) == '-'){
-            flag = true;
-            i++;
-        } else if(s.charAt(0) == '+'){
-            flag = false;
-            i++;
-        }
-        while(i<s.length()){
-            if(s.charAt(i)=='.'){
-                return flag ? -rs : rs;
-            }else if(s.charAt(i)>'9' || s.charAt(i)<'0'){
-                return flag ? -rs : rs;
-            }
-            int t = s.charAt(i++) - '0';
-            if(rs > Integer.MAX_VALUE/10){
-                return flag?Integer.MIN_VALUE:Integer.MAX_VALUE;
-            } else if( rs == Integer.MAX_VALUE/10 && t>7){
-                return flag?Integer.MIN_VALUE:Integer.MAX_VALUE;
-            }
-            rs = rs*10+t;
-        }
-        return flag ? -rs : rs;
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

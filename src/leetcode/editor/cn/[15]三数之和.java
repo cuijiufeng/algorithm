@@ -20,52 +20,55 @@ package leetcode.editor.cn;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        System.out.println(solu.threeSum(new int[]{-5, 0, -2, 3, -2, 1, 1, 3, 0, -5, 3, 3, 0, -1}));
-    }
-    public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> list = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < i; j++) {
-                for (int k = 0; k < j; k++) {
-                    if(nums[i]+nums[j]+nums[k] == 0){
-                        List<Integer> t = new ArrayList<>();
-                        t.add(nums[i]);
-                        t.add(nums[j]);
-                        t.add(nums[k]);
-                        if(!Solution.containsRepeat(list, t)){
-                            list.add(t);
+class ThreeSum {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> list = new ArrayList<>();
+            for (int i = 0; i < nums.length; i++) {
+                for (int j = 0; j < i; j++) {
+                    for (int k = 0; k < j; k++) {
+                        if (nums[i] + nums[j] + nums[k] == 0) {
+                            List<Integer> t = new ArrayList<>();
+                            t.add(nums[i]);
+                            t.add(nums[j]);
+                            t.add(nums[k]);
+                            if (!this.containsRepeat(list, t)) {
+                                list.add(t);
+                            }
                         }
                     }
                 }
             }
+            return list;
         }
-        return list;
-    }
 
-    public static boolean containsRepeat(List<List<Integer>> src, List<Integer> op){
-        List<Integer> t = new ArrayList<>(op);
-        for (int i = 0; i < src.size(); i++) {
-            t = new ArrayList<>(op);
-            for (int j = 0; j < src.get(i).size(); j++) {
-                for (int k = 0; k < t.size(); k++) {
-                    if(t.get(k).equals(src.get(i).get(j))){
-                        t.remove(k);
-                        break;
+        public boolean containsRepeat(List<List<Integer>> src, List<Integer> op) {
+            List<Integer> t = new ArrayList<>(op);
+            for (int i = 0; i < src.size(); i++) {
+                t = new ArrayList<>(op);
+                for (int j = 0; j < src.get(i).size(); j++) {
+                    for (int k = 0; k < t.size(); k++) {
+                        if (t.get(k).equals(src.get(i).get(j))) {
+                            t.remove(k);
+                            break;
+                        }
                     }
                 }
+                if (t.size() == 0) {
+                    return true;
+                }
             }
-            if(t.size() == 0){
-                return true;
-            }
+            return false;
         }
-        return false;
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new ThreeSum().new Solution();
+        System.out.println(solu.threeSum(new int[]{-5, 0, -2, 3, -2, 1, 1, 3, 0, -5, 3, 3, 0, -1}));
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+

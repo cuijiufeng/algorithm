@@ -13,29 +13,40 @@ package leetcode.editor.cn;
 //输出: 1->2->3 
 // Related Topics 链表
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-//Definition for singly-linked list.
+
+class DeleteDuplicates {
+    public static void main(String[] args) {
+
+    }
+
+    class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    //Definition for singly-linked list.
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public ListNode deleteDuplicates(ListNode head) {
+            ListNode p1 = head, p2 = head;
+            while (p1 != null) {
+                while (p2.next != null) {
+                    if (p2.next.val == p1.val) {
+                        p2.next = p2.next.next;
+                    } else {
+                        p2 = p2.next;
+                    }
+                }
+                p1 = p1.next;
+                p2 = p1;
+            }
+            return head;
+        }
+    }
+//leetcode submit region end(Prohibit modification and deletion)
 }
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
-        ListNode p1 = head, p2 = head;
-        while(p1!=null){
-            while(p2.next!=null){
-                if(p2.next.val == p1.val){
-                    p2.next = p2.next.next;
-                } else {
-                    p2 = p2.next;
-                }
-            }
-            p1 = p1.next;
-            p2 = p1;
-        }
-        return head;
-    }
-}
-//leetcode submit region end(Prohibit modification and deletion)

@@ -35,39 +35,42 @@ package leetcode.editor.cn;
 
 import java.util.Arrays;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        System.out.println(solu.convert("ABCDE", 4));
-    }
-    public String convert(String s, int numRows) {
-        if(s.length()==1 || numRows==1){
-            return s;
-        }
-        int group = s.length()%(numRows + numRows - 2)==0 ? s.length()/(numRows + numRows - 2) : s.length()/(numRows + numRows - 2)+1;
-        int colCnt = group*(numRows-1);
-        char[][] chars = new char[numRows][colCnt];
-        int row = 0;
-        int col = 0;
-        for (int i = 0; i < s.length(); i++) {
-            chars[row][col] = s.charAt(i);
-            if(i%(2*numRows-2)<numRows-1){
-                row++;
-            } else {
-                row--;
-                col++;
+class ZConvert {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String convert(String s, int numRows) {
+            if (s.length() == 1 || numRows == 1) {
+                return s;
             }
-        }
-        StringBuilder sb = new StringBuilder();
-        for (char[] aChar : chars) {
-            for (char c : aChar) {
-                if(c != 0){
-                    sb.append(c);
+            int group = s.length() % (numRows + numRows - 2) == 0 ? s.length() / (numRows + numRows - 2) : s.length() / (numRows + numRows - 2) + 1;
+            int colCnt = group * (numRows - 1);
+            char[][] chars = new char[numRows][colCnt];
+            int row = 0;
+            int col = 0;
+            for (int i = 0; i < s.length(); i++) {
+                chars[row][col] = s.charAt(i);
+                if (i % (2 * numRows - 2) < numRows - 1) {
+                    row++;
+                } else {
+                    row--;
+                    col++;
                 }
             }
+            StringBuilder sb = new StringBuilder();
+            for (char[] aChar : chars) {
+                for (char c : aChar) {
+                    if (c != 0) {
+                        sb.append(c);
+                    }
+                }
+            }
+            return sb.toString();
         }
-        return sb.toString();
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new ZConvert().new Solution();
+        System.out.println(solu.convert("ABCDE", 4));
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

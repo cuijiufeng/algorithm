@@ -58,56 +58,58 @@ package leetcode.editor.cn;
 // 
 // Related Topics 哈希表
 
+class IsValidSudoku {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean isValidSudoku(char[][] board) {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j] != '.' && !isValidate(board, i, j)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
+        private boolean isValidate(char[][] board, int x, int y) {
+            char t = board[x][y];
+            for (int i = 0; i < board[x].length; i++) {
+                if (i != y && board[x][i] == t) {
+                    return false;
+                }
+            }
+            for (int i = 0; i < board.length; i++) {
+                if (i != x && board[i][y] == t) {
+                    return false;
+                }
+            }
+            for (int i = x / 3 * 3; i < x / 3 * 3 + 3; i++) {
+                for (int j = y / 3 * 3; j < y / 3 * 3 + 3; j++) {
+                    if (i != x && j != y && board[i][j] == t) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
         char[][] board = new char[][]{
-                {'5','3','.','.','7','.','.','.','.'},
-                {'6','.','.','1','9','5','.','.','.'},
-                {'.','9','8','.','.','.','.','6','.'},
-                {'8','.','.','.','6','.','.','.','3'},
-                {'4','.','.','8','.','3','.','.','1'},
-                {'7','.','.','.','2','.','.','.','6'},
-                {'.','6','.','.','.','.','2','8','.'},
-                {'.','.','.','4','1','9','.','.','5'},
-                {'.','.','.','.','8','.','.','7','9'}
+                {'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+                {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+                {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+                {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+                {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+                {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+                {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+                {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+                {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
         };
-        Solution solu = new Solution();
+        Solution solu = new IsValidSudoku().new Solution();
         System.out.println(solu.isValidSudoku(board));
     }
-
-    public boolean isValidSudoku(char[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if(board[i][j] != '.' && !isValidate(board, i, j)){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private boolean isValidate(char[][] board, int x, int y) {
-        char t = board[x][y];
-        for (int i = 0; i < board[x].length; i++) {
-            if(i != y && board[x][i] == t){
-                return false;
-            }
-        }
-        for (int i = 0; i < board.length; i++) {
-            if(i != x && board[i][y] == t){
-                return false;
-            }
-        }
-        for (int i = x/3*3; i <x/3*3+3; i++) {
-            for (int j = y/3*3; j <y/3*3+3; j++) {
-                if (i != x && j != y && board[i][j] == t){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+

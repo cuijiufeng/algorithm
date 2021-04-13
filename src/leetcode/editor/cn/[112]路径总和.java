@@ -18,24 +18,34 @@ package leetcode.editor.cn;
 // 返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径 5->4->11->2。 
 // Related Topics 树 深度优先搜索
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+class HasPathSum {
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean hasPathSum(TreeNode root, int sum) {
-        if(root==null){
-            return false;
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
-        if(root.left==null && root.right==null){
-            return sum == root.val;
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean hasPathSum(TreeNode root, int sum) {
+            if (root == null) {
+                return false;
+            }
+            if (root.left == null && root.right == null) {
+                return sum == root.val;
+            }
+            return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
         }
-        return hasPathSum(root.left, sum-root.val) || hasPathSum(root.right, sum-root.val);
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solution = new HasPathSum().new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

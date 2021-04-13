@@ -1,4 +1,4 @@
-//给定一个整数，编写一个函数来判断它是否是 2 的幂次方。
+package leetcode.editor.cn;//给定一个整数，编写一个函数来判断它是否是 2 的幂次方。
 //
 // 示例 1: 
 //
@@ -20,18 +20,22 @@
 // 👍 232 👎 0
 
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class IsPowerOfTwo {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public boolean isPowerOfTwo(int n) {
+            long t = 1;
+            while (t < n) {
+                t = t << 1;
+            }
+            return t == n;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new IsPowerOfTwo().new Solution();
         System.out.println(solu.isPowerOfTwo(1073741825));
     }
-    public boolean isPowerOfTwo(int n) {
-        long t = 1;
-        while (t<n) {
-            t = t << 1;
-        }
-        return t == n;
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

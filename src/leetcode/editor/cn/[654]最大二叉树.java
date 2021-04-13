@@ -37,37 +37,43 @@ package leetcode.editor.cn;//给定一个不含重复元素的整数数组。一
 
 import java.util.Arrays;
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+class ConstructMaximumBinaryTree {
+    public static void main(String[] args) {
+        Solution solu = new ConstructMaximumBinaryTree().new Solution();
+        solu.constructMaximumBinaryTree(new int[]{3, 2, 1, 6, 0, 5});
+    }
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        solu.constructMaximumBinaryTree(new int[]{3,2,1,6,0,5});
-    }
-    public TreeNode constructMaximumBinaryTree(int[] nums) {
-        if (nums.length == 0){
-            return null;
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
-        TreeNode root;
-        int pos = 0;
-        for (int i = 1; i < nums.length; i++) {
-            if(nums[i] > nums[pos]){
-                pos = i;
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public TreeNode constructMaximumBinaryTree(int[] nums) {
+            if (nums.length == 0) {
+                return null;
             }
+            TreeNode root;
+            int pos = 0;
+            for (int i = 1; i < nums.length; i++) {
+                if (nums[i] > nums[pos]) {
+                    pos = i;
+                }
+            }
+            root = new TreeNode(nums[pos]);
+            int[] left = Arrays.copyOfRange(nums, 0, pos);
+            root.left = constructMaximumBinaryTree(left);
+            int[] right = Arrays.copyOfRange(nums, pos + 1, nums.length);
+            root.right = constructMaximumBinaryTree(right);
+            return root;
         }
-        root = new TreeNode(nums[pos]);
-        int[] left = Arrays.copyOfRange(nums, 0, pos);
-        root.left = constructMaximumBinaryTree(left);
-        int[] right = Arrays.copyOfRange(nums, pos+1, nums.length);
-        root.right = constructMaximumBinaryTree(right);
-        return root;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}

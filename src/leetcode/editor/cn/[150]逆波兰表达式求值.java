@@ -63,37 +63,40 @@ package leetcode.editor.cn;//根据 逆波兰表示法，求表达式的值。
 
 import java.util.Stack;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        System.out.println(solu.evalRPN(new String[]{"4", "13", "5", "/", "+"}));
+class EvalRPN {
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int evalRPN(String[] tokens) {
+            Stack<Integer> stack = new Stack<>();
+            for (String token : tokens) {
+                if (token.equals("+")) {
+                    Integer right = stack.pop();
+                    Integer left = stack.pop();
+                    stack.push(left + right);
+                } else if (token.equals("-")) {
+                    Integer right = stack.pop();
+                    Integer left = stack.pop();
+                    stack.push(left - right);
+                } else if (token.equals("*")) {
+                    Integer right = stack.pop();
+                    Integer left = stack.pop();
+                    stack.push(left * right);
+                } else if (token.equals("/")) {
+                    Integer right = stack.pop();
+                    Integer left = stack.pop();
+                    stack.push(left / right);
+                } else {
+                    stack.push(Integer.parseInt(token));
+                }
+            }
+            return stack.pop();
+        }
     }
 
-    public int evalRPN(String[] tokens) {
-        Stack<Integer> stack = new Stack<>();
-        for (String token : tokens) {
-            if (token.equals("+")){
-                Integer right = stack.pop();
-                Integer left = stack.pop();
-                stack.push(left+right);
-            } else if (token.equals("-")){
-                Integer right = stack.pop();
-                Integer left = stack.pop();
-                stack.push(left-right);
-            } else if (token.equals("*")){
-                Integer right = stack.pop();
-                Integer left = stack.pop();
-                stack.push(left*right);
-            } else if (token.equals("/")){
-                Integer right = stack.pop();
-                Integer left = stack.pop();
-                stack.push(left/right);
-            } else {
-                stack.push(Integer.parseInt(token));
-            }
-        }
-        return stack.pop();
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new EvalRPN().new Solution();
+        System.out.println(solu.evalRPN(new String[]{"4", "13", "5", "/", "+"}));
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

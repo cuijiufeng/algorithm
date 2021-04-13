@@ -1,4 +1,4 @@
-//给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。 
+package leetcode.editor.cn;//给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
 //
 // 
 //
@@ -20,24 +20,30 @@
 //输出: [1,2,2,3,5,6] 
 // Related Topics 数组 双指针
 
+class Merge2 {
+    public static void main(String[] args) {
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int p1=m-1, p2=n-1, len=m+n-1;
-        while(p1>=0 && p2>=0){
-            if(nums1[p1] >= nums2[p2]){
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public void merge(int[] nums1, int m, int[] nums2, int n) {
+            int p1 = m - 1, p2 = n - 1, len = m + n - 1;
+            while (p1 >= 0 && p2 >= 0) {
+                if (nums1[p1] >= nums2[p2]) {
+                    nums1[len--] = nums1[p1--];
+                } else {
+                    nums1[len--] = nums2[p2--];
+                }
+            }
+            while (p1 >= 0) {
                 nums1[len--] = nums1[p1--];
-            } else {
+            }
+            while (p2 >= 0) {
                 nums1[len--] = nums2[p2--];
             }
         }
-        while(p1>=0){
-            nums1[len--] = nums1[p1--];
-        }
-        while(p2>=0){
-            nums1[len--] = nums2[p2--];
-        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}
+

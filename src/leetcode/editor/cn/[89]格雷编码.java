@@ -1,4 +1,4 @@
-//格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。 
+package leetcode.editor.cn;//格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。
 //
 // 给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。即使有多个不同答案，你也只需要返回其中一种。 
 //
@@ -34,44 +34,50 @@
 // 
 // Related Topics 回溯算法 
 // 👍 231 👎 0
+
 import java.util.ArrayList;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class GrayCode {
+    public static void main(String[] args) {
+        Solution solu = new GrayCode().new Solution();
         List<Integer> list = solu.grayCode(11);//[0,1,3,2,6,7,5,4]
         System.out.println(list.toString());
     }
 
-    public List<Integer> grayCode(int n) {
-        List<Integer> list = new ArrayList<>();
-        list.add(0);
-        f(0, n, list);
-        return list;
-    }
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
 
-    //时间超限
-    public void f(int num, int n, List<Integer> list){
-        int t = num;
-        repeat:
-        for (int i = 0; i < n; i++) {
-            int z = t & (int)Math.pow(2, i);
-            if (z != 0){
-                t -= (int)Math.pow(2, i);
-            } else {
-                t += (int)Math.pow(2, i);
-            }
-            for (int j = 0; j < list.size(); j++) {
-                if (list.contains(t) || t >= Math.pow(2, n)){
-                    t = num;
-                    continue repeat;
+
+        public List<Integer> grayCode(int n) {
+            List<Integer> list = new ArrayList<>();
+            list.add(0);
+            f(0, n, list);
+            return list;
+        }
+
+        //时间超限
+        public void f(int num, int n, List<Integer> list) {
+            int t = num;
+            repeat:
+            for (int i = 0; i < n; i++) {
+                int z = t & (int) Math.pow(2, i);
+                if (z != 0) {
+                    t -= (int) Math.pow(2, i);
+                } else {
+                    t += (int) Math.pow(2, i);
                 }
+                for (int j = 0; j < list.size(); j++) {
+                    if (list.contains(t) || t >= Math.pow(2, n)) {
+                        t = num;
+                        continue repeat;
+                    }
+                }
+                list.add(t);
+                f(t, n, list);
             }
-            list.add(t);
-            f(t, n, list);
         }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}
+

@@ -35,53 +35,62 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
+class KthSmallest {
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        TreeNode t1 = new TreeNode(3);
-        TreeNode t2 = new TreeNode(1);
-        TreeNode t3 = new TreeNode(4);
-        TreeNode t4 = new TreeNode(2);
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int kthSmallest(TreeNode root, int k) {
+            Stack<TreeNode> stack = new Stack<>();
+            List<TreeNode> list = new ArrayList<>();
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            while (!stack.isEmpty()) {
+                TreeNode t = stack.pop();
+                list.add(t);
+                if (t.right != null) {
+                    t = t.right;
+                    while (t != null) {
+                        stack.push(t);
+                        t = t.left;
+                    }
+                }
+            }
+            return list.get(k - 1).val;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        KthSmallest kthSmallest = new KthSmallest();
+        Solution solu = kthSmallest.new Solution();
+        TreeNode t1 = kthSmallest.new TreeNode(3);
+        TreeNode t2 = kthSmallest.new TreeNode(1);
+        TreeNode t3 = kthSmallest.new TreeNode(4);
+        TreeNode t4 = kthSmallest.new TreeNode(2);
         t1.left = t2;
         t1.right = t3;
         t2.right = t4;
         solu.kthSmallest(t1, 1);
     }
-
-    public int kthSmallest(TreeNode root, int k) {
-        Stack<TreeNode> stack = new Stack<>();
-        List<TreeNode> list = new ArrayList<>();
-        while (root != null){
-            stack.push(root);
-            root = root.left;
-        }
-        while (!stack.isEmpty()){
-            TreeNode t = stack.pop();
-            list.add(t);
-            if (t.right != null){
-                t = t.right;
-                while (t != null){
-                    stack.push(t);
-                    t = t.left;
-                }
-            }
-        }
-        return list.get(k-1).val;
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

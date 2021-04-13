@@ -31,28 +31,34 @@ package leetcode.editor.cn;//「外观数列」是一个整数序列，从数字
 //"1" 可以读作 "11"。所以答案是 "12" 和 "11" 组合在一起，也就是 "1211"。 
 // Related Topics 字符串
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String countAndSay(int n) {
-        if(n==1){
-            return "1";
-        }
-        String str = countAndSay(n - 1);
-        int cnt = 0;
-        char t = str.charAt(0);
-        String rs =  "";
-        for (int i=0; i<str.length(); i++){
-            if(str.charAt(i) == t){
-                cnt++;
-            } else {
-                rs += cnt+""+t;
-                t = str.charAt(i);
-                cnt = 1;
+class CountAndSay {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String countAndSay(int n) {
+            if (n == 1) {
+                return "1";
             }
+            String str = countAndSay(n - 1);
+            int cnt = 0;
+            char t = str.charAt(0);
+            String rs = "";
+            for (int i = 0; i < str.length(); i++) {
+                if (str.charAt(i) == t) {
+                    cnt++;
+                } else {
+                    rs += cnt + "" + t;
+                    t = str.charAt(i);
+                    cnt = 1;
+                }
+            }
+            rs += cnt + "" + t;
+            return rs;
         }
-        rs += cnt+""+t;
-        return rs;
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+

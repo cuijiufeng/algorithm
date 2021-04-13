@@ -23,28 +23,33 @@ package leetcode.editor.cn;
 
 import java.util.Arrays;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class PlusOne {
+    public static void main(String[] args) {
+        Solution solu = new PlusOne().new Solution();
         System.out.println(Arrays.toString(solu.plusOne(new int[]{9})));
     }
-    public int[] plusOne(int[] digits) {
-        digits[digits.length-1] += 1;
-        for(int i=digits.length-2; i>=0; i--){
-            if(digits[i+1]/10 == 1){
-                digits[i+1] %= 10;
-                digits[i] += 1;
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public int[] plusOne(int[] digits) {
+            digits[digits.length - 1] += 1;
+            for (int i = digits.length - 2; i >= 0; i--) {
+                if (digits[i + 1] / 10 == 1) {
+                    digits[i + 1] %= 10;
+                    digits[i] += 1;
+                }
             }
+            if (digits[0] > 9) {
+                int[] src = new int[digits.length + 1];
+                System.arraycopy(digits, 0, src, 1, digits.length);
+                digits = src;
+                digits[1] %= 10;
+                digits[0] = 1;
+            }
+            return digits;
         }
-        if(digits[0]>9){
-            int[] src = new int[digits.length+1];
-            System.arraycopy(digits, 0, src, 1, digits.length);
-            digits = src;
-            digits[1] %= 10;
-            digits[0] = 1;
-        }
-        return digits;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+
+}

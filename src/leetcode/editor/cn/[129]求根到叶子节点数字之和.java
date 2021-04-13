@@ -39,51 +39,58 @@ package leetcode.editor.cn;
 import java.util.ArrayList;
 import java.util.List;
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+class SumNumbers {
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        TreeNode t1 = new TreeNode(1);
-        TreeNode t2 = new TreeNode(2);
-        TreeNode t3 = new TreeNode(3);
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public int sumNumbers(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            List<Integer> list = new ArrayList<>();
+            f(root, list, root.val + "");
+            int sum = 0;
+            for (Integer integer : list) {
+                sum += integer;
+            }
+            return sum;
+        }
+
+        public void f(TreeNode root, List<Integer> list, String s) {
+            if (root.left == null && root.right == null) {
+                list.add(Integer.parseInt(s));
+                return;
+            }
+            if (root.left != null) {
+                f(root.left, list, s + root.left.val);
+            }
+            if (root.right != null) {
+                f(root.right, list, s + root.right.val);
+            }
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        SumNumbers sumNumbers = new SumNumbers();
+        Solution solu = sumNumbers.new Solution();
+        TreeNode t1 = sumNumbers.new TreeNode(1);
+        TreeNode t2 = sumNumbers.new TreeNode(2);
+        TreeNode t3 = sumNumbers.new TreeNode(3);
         t1.left = t2;
         t1.right = t3;
         System.out.println(solu.sumNumbers(t1));
     }
-
-    public int sumNumbers(TreeNode root) {
-        if (root == null){
-            return 0;
-        }
-        List<Integer> list = new ArrayList<>();
-        f(root, list, root.val+"");
-        int sum = 0;
-        for (Integer integer : list) {
-            sum += integer;
-        }
-        return sum;
-    }
-
-    public void f(TreeNode root, List<Integer> list, String s){
-        if (root.left == null && root.right == null){
-            list.add(Integer.parseInt(s));
-            return;
-        }
-        if (root.left != null){
-            f(root.left, list, s+root.left.val);
-        }
-        if(root.right != null){
-            f(root.right, list, s+root.right.val);
-        }
-    }
 }
-
-//leetcode submit region end(Prohibit modification and deletion)

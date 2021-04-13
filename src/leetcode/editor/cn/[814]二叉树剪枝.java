@@ -1,4 +1,4 @@
-//给定二叉树根结点 root ，此外树的每个结点的值要么是 0，要么是 1。 
+package leetcode.editor.cn;//给定二叉树根结点 root ，此外树的每个结点的值要么是 0，要么是 1。
 //
 // 返回移除了所有不包含 1 的子树的原二叉树。 
 //
@@ -46,63 +46,77 @@
 
 import java.util.Stack;
 
-//leetcode submit region begin(Prohibit modification and deletion)
+class PruneTree {
+    //leetcode submit region begin(Prohibit modification and deletion)
 //Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
 
-class Solution {
-    public TreeNode pruneTree(TreeNode root) {
-        TreeNode t = root;
-        Stack<TreeNode> stack = new Stack<>();
-        if (!isPruneTree(root)){
-            return null;
+        TreeNode() {
         }
-        while (t != null){
-            if (!isPruneTree(t.left)){
-                t.left = null;
-            }
-            if (!isPruneTree(t.right)){
-                t.right = null;
-            }
-            stack.push(t);
-            t = t.left;
+
+        TreeNode(int val) {
+            this.val = val;
         }
-        while (!stack.isEmpty()){
-            TreeNode pop = stack.pop();
-            if ((t = pop.right) != null){
-                while (t != null){
-                    if (!isPruneTree(t.left)){
-                        t.left = null;
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    class Solution {
+        public TreeNode pruneTree(TreeNode root) {
+            TreeNode t = root;
+            Stack<TreeNode> stack = new Stack<>();
+            if (!isPruneTree(root)) {
+                return null;
+            }
+            while (t != null) {
+                if (!isPruneTree(t.left)) {
+                    t.left = null;
+                }
+                if (!isPruneTree(t.right)) {
+                    t.right = null;
+                }
+                stack.push(t);
+                t = t.left;
+            }
+            while (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                if ((t = pop.right) != null) {
+                    while (t != null) {
+                        if (!isPruneTree(t.left)) {
+                            t.left = null;
+                        }
+                        if (!isPruneTree(t.right)) {
+                            t.right = null;
+                        }
+                        stack.push(t);
+                        t = t.left;
                     }
-                    if (!isPruneTree(t.right)){
-                        t.right = null;
-                    }
-                    stack.push(t);
-                    t = t.left;
                 }
             }
+            return root;
         }
-        return root;
+
+        public boolean isPruneTree(TreeNode root) {
+            if (root == null) {
+                return false;
+            }
+            if (root.val == 1) {
+                return true;
+            }
+            return isPruneTree(root.left) || isPruneTree(root.right);
+        }
     }
-    public boolean isPruneTree(TreeNode root){
-        if (root == null){
-            return false;
-        }
-        if (root.val == 1){
-            return true;
-        }
-        return isPruneTree(root.left) || isPruneTree(root.right);
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        PruneTree pruneTree = new PruneTree();
+        Solution solution = pruneTree.new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

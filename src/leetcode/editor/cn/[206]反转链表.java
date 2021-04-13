@@ -11,25 +11,15 @@ package leetcode.editor.cn;
 // Related Topics 链表
 
 
-
-//Definition for singly-linked list.
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-}
-
-// th
-// 2->  1->3->4->5->NULL
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class ReverseList{
     public static void main(String[] args){
-        Solution solu = new Solution();
-        ListNode ln1 = new ListNode(1);
-        ListNode ln2 = new ListNode(2);
-        ListNode ln3 = new ListNode(3);
-        ListNode ln4 = new ListNode(4);
-        ListNode ln5 = new ListNode(5);
+        ReverseList reverseList = new ReverseList();
+        Solution solu = reverseList.new Solution();
+        ListNode ln1 = reverseList.new ListNode(1);
+        ListNode ln2 = reverseList.new ListNode(2);
+        ListNode ln3 = reverseList.new ListNode(3);
+        ListNode ln4 = reverseList.new ListNode(4);
+        ListNode ln5 = reverseList.new ListNode(5);
         ln1.next = ln2;
         ln2.next = ln3;
         ln3.next = ln4;
@@ -40,20 +30,32 @@ class Solution {
             listNode = listNode.next;
         }
     }
+    //Definition for singly-linked list.
+    class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+    }
 
-    //循环
-    public ListNode reverseList(ListNode head) {
-        if (head == null){
+    // th
+// 2->  1->3->4->5->NULL
+//leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        //循环
+        public ListNode reverseList(ListNode head) {
+            if (head == null){
+                return head;
+            }
+            ListNode t, p = head;
+            while (p.next != null){
+                t = p.next;
+                p.next = t.next;
+                t.next = head;
+                head = t;
+            }
             return head;
         }
-        ListNode t, p = head;
-        while (p.next != null){
-            t = p.next;
-            p.next = t.next;
-            t.next = head;
-            head = t;
-        }
-        return head;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+
+}

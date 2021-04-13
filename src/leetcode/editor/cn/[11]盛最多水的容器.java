@@ -18,27 +18,30 @@ package leetcode.editor.cn;
 //输出：49 
 // Related Topics 数组 双指针
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        System.out.println(solu.maxArea(new int[]{1,2}));
-    }
-    public int maxArea(int[] height) {
-        if (height.length < 2){
-            return 0;
-        }
-        int max = 0;
-        for (int i = 1; i<height.length; i++) {
-            for (int j = 0; j < i; j++) {
-                int t = (i - j) * (height[i] < height[j] ? height[i] : height[j]);
-                if(t>max){
-                    max = t;
+class MaxArea {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int maxArea(int[] height) {
+            if (height.length < 2) {
+                return 0;
+            }
+            int max = 0;
+            for (int i = 1; i < height.length; i++) {
+                for (int j = 0; j < i; j++) {
+                    int t = (i - j) * (height[i] < height[j] ? height[i] : height[j]);
+                    if (t > max) {
+                        max = t;
+                    }
                 }
             }
+            return max;
         }
-        return max;
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new MaxArea().new Solution();
+        System.out.println(solu.maxArea(new int[]{1, 2}));
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+

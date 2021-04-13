@@ -1,4 +1,4 @@
-//编写一个函数来验证输入的字符串是否是有效的 IPv4 或 IPv6 地址。 
+package leetcode.editor.cn;//编写一个函数来验证输入的字符串是否是有效的 IPv4 或 IPv6 地址。
 //
 // IPv4 地址由十进制数和点来表示，每个地址包含4个十进制数，其范围为 0 - 255， 用(".")分割。比如，172.16.254.1； 
 //
@@ -48,77 +48,79 @@
 // Related Topics 字符串 
 // 👍 53 👎 0
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public String validIPAddress(String IP) {
-        if (IP.contains(".")) {
-            int cnt = 0;
-            for (int i = 0; i < IP.length(); i++) {
-                if (IP.charAt(i) == '.'){
-                    cnt++;
+class verfityIp{
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public String validIPAddress(String IP) {
+            if (IP.contains(".")) {
+                int cnt = 0;
+                for (int i = 0; i < IP.length(); i++) {
+                    if (IP.charAt(i) == '.'){
+                        cnt++;
+                    }
                 }
-            }
-            if (cnt != 3){
-                return "Neither";
-            }
-            return parseIPv4(IP);
-        } else if (IP.contains(":")){
-            int cnt = 0;
-            for (int i = 0; i < IP.length(); i++) {
-                if (IP.charAt(i) == ':'){
-                    cnt++;
+                if (cnt != 3){
+                    return "Neither";
                 }
+                return parseIPv4(IP);
+            } else if (IP.contains(":")){
+                int cnt = 0;
+                for (int i = 0; i < IP.length(); i++) {
+                    if (IP.charAt(i) == ':'){
+                        cnt++;
+                    }
+                }
+                if (cnt != 7){
+                    return "Neither";
+                }
+                return parseIPv6(IP);
             }
-            if (cnt != 7){
-                return "Neither";
-            }
-            return parseIPv6(IP);
-        }
-        return "Neither";
-    }
-
-    private String parseIPv6(String IP) {
-        String[] split = IP.split(":");
-        if (split.length != 8){
             return "Neither";
         }
-        for (int i = 0; i < split.length; i++) {
-            if(split[i].length() < 1){
-                return "Neither";
-            } else if (split[i].length() > 4) {
+
+        private String parseIPv6(String IP) {
+            String[] split = IP.split(":");
+            if (split.length != 8){
                 return "Neither";
             }
-            for (int j = 0; j < split[i].length(); j++) {
-                char c = split[i].charAt(j);
-                if (!(c >= '0' && c <= '9' || c >= 'a' && c <= 'f' || c >= 'A' && c <= 'F')){
+            for (int i = 0; i < split.length; i++) {
+                if(split[i].length() < 1){
+                    return "Neither";
+                } else if (split[i].length() > 4) {
+                    return "Neither";
+                }
+                for (int j = 0; j < split[i].length(); j++) {
+                    char c = split[i].charAt(j);
+                    if (!(c >= '0' && c <= '9' || c >= 'a' && c <= 'f' || c >= 'A' && c <= 'F')){
+                        return "Neither";
+                    }
+                }
+            }
+            return "IPv6";
+        }
+
+        private String parseIPv4(String IP) {
+            String[] split = IP.split("\\.");
+            if (split.length != 4){
+                return "Neither";
+            }
+            for (int i = 0; i < split.length; i++) {
+                if (split[i].length() > 1 && split[i].charAt(0) == '0'){
+                    return "Neither";
+                }
+                int num = 0;
+                try {
+                    num = Integer.parseInt(split[i]);
+                } catch (NumberFormatException e) {
+                    return "Neither";
+                }
+                if (num < 0 || num > 255){
                     return "Neither";
                 }
             }
+            return "IPv4";
         }
-        return "IPv6";
     }
-
-    private String parseIPv4(String IP) {
-        String[] split = IP.split("\\.");
-        if (split.length != 4){
-            return "Neither";
-        }
-        for (int i = 0; i < split.length; i++) {
-            if (split[i].length() > 1 && split[i].charAt(0) == '0'){
-                return "Neither";
-            }
-            int num = 0;
-            try {
-                num = Integer.parseInt(split[i]);
-            } catch (NumberFormatException e) {
-                return "Neither";
-            }
-            if (num < 0 || num > 255){
-                return "Neither";
-            }
-        }
-        return "IPv4";
-    }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+
+}

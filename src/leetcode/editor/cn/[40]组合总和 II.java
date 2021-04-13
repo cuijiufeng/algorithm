@@ -38,40 +38,43 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        List<List<Integer>> lists = solu.combinationSum2(new int[]{2,5,2,1,2}, 5);
+class CombinationSum2 {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+            List<List<Integer>> list = new ArrayList<>();
+            f(candidates, target, new ArrayList<Integer>(), 0, list);
+            return list;
+        }
+
+        public void f(int[] cadidates, int target, List<Integer> pos, int sum, List<List<Integer>> list) {
+            if (sum > target) {
+                return;
+            }
+            if (sum == target) {
+                List<Integer> t = pos.stream().map(i -> cadidates[i]).collect(Collectors.toList());
+                t.sort(null);
+                if (!list.contains(t)) {
+                    list.add(t);
+                }
+                return;
+            }
+            for (int i = 0; i < cadidates.length && !pos.contains(i); i++) {
+                int size = pos.size();
+                pos.add(i);
+                f(cadidates, target, pos, sum + cadidates[i], list);
+                pos.remove(size);
+            }
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new CombinationSum2().new Solution();
+        List<List<Integer>> lists = solu.combinationSum2(new int[]{2, 5, 2, 1, 2}, 5);
         for (List<Integer> list : lists) {
             System.out.println(Arrays.toString(list.toArray()));
         }
     }
-    
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> list = new ArrayList<>();
-        f(candidates, target, new ArrayList<Integer>(), 0, list);
-        return list;
-    }
-
-    public void f(int[] cadidates, int target, List<Integer> pos, int sum, List<List<Integer>> list){
-        if(sum > target){
-            return;
-        }
-        if(sum == target){
-            List<Integer> t = pos.stream().map(i -> cadidates[i]).collect(Collectors.toList());
-            t.sort(null);
-            if (!list.contains(t)){
-                list.add(t);
-            }
-            return;
-        }
-        for (int i = 0; i < cadidates.length && !pos.contains(i); i++) {
-            int size = pos.size();
-            pos.add(i);
-            f(cadidates, target, pos, sum+cadidates[i], list);
-            pos.remove(size);
-        }
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+

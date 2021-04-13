@@ -29,23 +29,62 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Collectors;
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+class LevelOrderBottom {
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        TreeNode t1 = new TreeNode(3);
-        TreeNode t2 = new TreeNode(9);
-        TreeNode t3 = new TreeNode(20);
-        TreeNode t4 = new TreeNode(15);
-        TreeNode t5 = new TreeNode(7);
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public List<List<Integer>> levelOrderBottom(TreeNode root) {
+            List<List<Integer>> list = new ArrayList<>();
+            Queue<TreeNode> queue = new LinkedBlockingQueue<>();
+            if (root == null) {
+                return list;
+            }
+
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                List<TreeNode> t = new ArrayList<>();
+                for (int i = 0; i < size; i++) {
+                    t.add(queue.poll());
+                }
+                List<Integer> collect = t.stream().map(treeNode -> treeNode.val).collect(Collectors.toList());
+                list.add(collect);
+
+                for (TreeNode treeNode : t) {
+                    if (treeNode.left != null) {
+                        queue.add(treeNode.left);
+                    }
+                    if (treeNode.right != null) {
+                        queue.add(treeNode.right);
+                    }
+                }
+            }
+            Collections.reverse(list);
+            return list;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        LevelOrderBottom levelOrderBottom = new LevelOrderBottom();
+        Solution solu = levelOrderBottom.new Solution();
+        TreeNode t1 = levelOrderBottom.new TreeNode(3);
+        TreeNode t2 = levelOrderBottom.new TreeNode(9);
+        TreeNode t3 = levelOrderBottom.new TreeNode(20);
+        TreeNode t4 = levelOrderBottom.new TreeNode(15);
+        TreeNode t5 = levelOrderBottom.new TreeNode(7);
         t1.left = t2;
         t1.right = t3;
         t3.left = t4;
@@ -57,34 +96,4 @@ class Solution {
         }
     }
 
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        List<List<Integer>> list = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedBlockingQueue<>();
-        if (root == null){
-            return list;
-        }
-
-        queue.add(root);
-        while (!queue.isEmpty()){
-            int size = queue.size();
-            List<TreeNode> t = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                t.add(queue.poll());
-            }
-            List<Integer> collect = t.stream().map(treeNode -> treeNode.val).collect(Collectors.toList());
-            list.add(collect);
-
-            for (TreeNode treeNode : t) {
-                if (treeNode.left != null){
-                    queue.add(treeNode.left);
-                }
-                if (treeNode.right != null){
-                    queue.add(treeNode.right);
-                }
-            }
-        }
-        Collections.reverse(list);
-        return list;
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

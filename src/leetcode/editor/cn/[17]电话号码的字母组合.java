@@ -19,36 +19,38 @@ package leetcode.editor.cn;
 import java.util.ArrayList;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    private static final String[] strs = new String[]{"", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+class LetterCombinations {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        private final String[] strs = new String[]{"", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        public List<String> letterCombinations(String digits) {
+            if(digits.isEmpty()){
+                return new ArrayList<>();
+            } else if(digits.length() == 1){
+                List<String> rs = new ArrayList<>();
+                String str = strs[digits.charAt(0) - '0' - 1];
+                for (char c : str.toCharArray()) {
+                    rs.add(String.valueOf(c));
+                }
+                return rs;
+            }
 
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        System.out.println(solu.letterCombinations(""));
-    }
-
-    public List<String> letterCombinations(String digits) {
-        if(digits.isEmpty()){
-            return new ArrayList<>();
-        } else if(digits.length() == 1){
             List<String> rs = new ArrayList<>();
+            List<String> stringList = letterCombinations(digits.substring(1));
             String str = strs[digits.charAt(0) - '0' - 1];
-            for (char c : str.toCharArray()) {
-                rs.add(String.valueOf(c));
+            for (int i = 0; i < str.length(); i++) {
+                for (String s : stringList) {
+                    rs.add(str.charAt(i)+s);
+                }
             }
             return rs;
         }
+    }
+//leetcode submit region end(Prohibit modification and deletion)
 
-        List<String> rs = new ArrayList<>();
-        List<String> stringList = letterCombinations(digits.substring(1));
-        String str = strs[digits.charAt(0) - '0' - 1];
-        for (int i = 0; i < str.length(); i++) {
-            for (String s : stringList) {
-                rs.add(str.charAt(i)+s);
-            }
-        }
-        return rs;
+    public static void main(String[] args){
+        Solution solu = new LetterCombinations().new Solution();
+        System.out.println(solu.letterCombinations(""));
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+

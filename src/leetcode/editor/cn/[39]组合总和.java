@@ -37,42 +37,45 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
-        System.out.println(solu.combinationSum(new int[]{2, 3, 6, 7}, 7));
-    }
-    
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> list = new ArrayList<>();
-        resolveQuestin(list, candidates, target, new ArrayList<>());
-        for (int i = 0; i < list.size(); i++) {
-            List<Integer> integers = list.get(i);
-            for (int j = 0; j < list.size(); j++) {
-                if(i != j && integers.equals(list.get(j))){
-                    list.remove(i);
-                    i--;
-                    break;
+class CombinationSum {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            List<List<Integer>> list = new ArrayList<>();
+            resolveQuestin(list, candidates, target, new ArrayList<>());
+            for (int i = 0; i < list.size(); i++) {
+                List<Integer> integers = list.get(i);
+                for (int j = 0; j < list.size(); j++) {
+                    if (i != j && integers.equals(list.get(j))) {
+                        list.remove(i);
+                        i--;
+                        break;
+                    }
                 }
             }
+            return list;
         }
-        return list;
+
+        public void resolveQuestin(List<List<Integer>> list, int[] candidates, int target, List<Integer> data) {
+            if (target < 0) {
+                return;
+            } else if (0 == target) {
+                List<Integer> integers = new ArrayList<>(data);
+                Collections.sort(integers);
+                list.add(integers);
+            }
+            for (int i = 0; i < candidates.length; i++) {
+                data.add(candidates[i]);
+                resolveQuestin(list, candidates, target - candidates[i], data);
+                data.remove(data.size() - 1);
+            }
+        }
     }
 
-    public void resolveQuestin(List<List<Integer>> list, int[] candidates, int target, List<Integer> data){
-        if(target<0){
-            return;
-        } else if (0 == target){
-            List<Integer> integers = new ArrayList<>(data);
-            Collections.sort(integers);
-            list.add(integers);
-        }
-        for (int i=0; i<candidates.length; i++) {
-            data.add(candidates[i]);
-            resolveQuestin(list, candidates, target-candidates[i], data);
-            data.remove(data.size()-1);
-        }
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new CombinationSum().new Solution();
+        System.out.println(solu.combinationSum(new int[]{2, 3, 6, 7}, 7));
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)
+

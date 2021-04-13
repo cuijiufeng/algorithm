@@ -35,27 +35,38 @@ package leetcode.editor.cn;
 //输出: false
 // 
 // Related Topics 树 深度优先搜索
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-//Definition for a binary tree node.
-}
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        if(p==null && q==null){
-            return true;
+class IsSameTree {
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
-        if(p==null&&q!=null || p!=null&&q==null){
-            return false;
+//Definition for a binary tree node.
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean isSameTree(TreeNode p, TreeNode q) {
+            if (p == null && q == null) {
+                return true;
+            }
+            if (p == null && q != null || p != null && q == null) {
+                return false;
+            }
+            if (p.val != q.val) {
+                return false;
+            }
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
         }
-        if(p.val!=q.val){
-            return false;
-        }
-        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        IsSameTree isSameTree = new IsSameTree();
+        Solution solution = isSameTree.new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

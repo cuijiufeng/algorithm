@@ -17,21 +17,32 @@ package leetcode.editor.cn;
 // 返回它的最大深度 3 。 
 // Related Topics 树 深度优先搜索
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-//Definition for a binary tree node.
-}
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int maxDepth(TreeNode root) {
-        if(root == null){
-            return 0;
+class MaxDepth {
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
-        return Math.max(1+maxDepth(root.left), 1+maxDepth(root.right));
+//Definition for a binary tree node.
+    }
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int maxDepth(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            return Math.max(1 + maxDepth(root.left), 1 + maxDepth(root.right));
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        MaxDepth maxDepth = new MaxDepth();
+        Solution solution = maxDepth.new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

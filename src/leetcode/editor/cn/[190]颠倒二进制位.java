@@ -1,4 +1,4 @@
-//颠倒给定的 32 位无符号整数的二进制位。 
+package leetcode.editor.cn;//颠倒给定的 32 位无符号整数的二进制位。
 //
 // 
 //
@@ -34,23 +34,28 @@
 // Related Topics 位运算 
 // 👍 216 👎 0
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-public class Solution {
-    // you need treat n as an unsigned value
-    public int reverseBits(int n) {
-        int cnt = 31;
-        char[] chs = new char[32];
-        while (n != 0){
-            chs[cnt--] = (char)(n % 2);
-            n >>>= 1;
-        }
-        int val = 0;
-        for (int i = 0; i < chs.length; i++) {
-            int t = chs[i] << i;
-            val += t;
-        }
-        return val;
+class ReverseBits{
+    public static void main(String[] args) {
+        Solution solution = new ReverseBits().new Solution();
     }
-}
+    //leetcode submit region begin(Prohibit modification and deletion)
+    public class Solution {
+        // you need treat n as an unsigned value
+        public int reverseBits(int n) {
+            int cnt = 31;
+            char[] chs = new char[32];
+            while (n != 0){
+                chs[cnt--] = (char)(n % 2);
+                n >>>= 1;
+            }
+            int val = 0;
+            for (int i = 0; i < chs.length; i++) {
+                int t = chs[i] << i;
+                val += t;
+            }
+            return val;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
+}
+

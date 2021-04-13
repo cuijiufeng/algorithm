@@ -29,74 +29,76 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Calculate{
     public static void main(String[] args){
-        Solution solu = new Solution();
+        Solution solu = new Calculate().new Solution();
         solu.calculate("22-22");
     }
-
-    public int calculate(String s) {
-        boolean isNum = false;
-        Stack<String> stack = new Stack<>();
-        List<String> out = new ArrayList<>();
-        //先将中缀表达式转换成后缀表达式
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == ' '){
-                isNum = false;
-            } else if ('(' == s.charAt(i)) {
-                isNum = false;
-                stack.push("(");
-            } else if (')' == s.charAt(i)) {
-                isNum = false;
-                String t;
-                while (!(t = stack.pop()).equals("(")){
-                    out.add(t);
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int calculate(String s) {
+            boolean isNum = false;
+            Stack<String> stack = new Stack<>();
+            List<String> out = new ArrayList<>();
+            //先将中缀表达式转换成后缀表达式
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == ' '){
+                    isNum = false;
+                } else if ('(' == s.charAt(i)) {
+                    isNum = false;
+                    stack.push("(");
+                } else if (')' == s.charAt(i)) {
+                    isNum = false;
+                    String t;
+                    while (!(t = stack.pop()).equals("(")){
+                        out.add(t);
+                    }
+                } else if ('+' == s.charAt(i)) {
+                    isNum = false;
+                    String t;
+                    while(!stack.isEmpty() && ((t=stack.peek()).equals("-") || t.equals("+"))){
+                        out.add(stack.pop());
+                    }
+                    stack.push("+");
+                } else if ('-' == s.charAt(i)) {
+                    isNum = false;
+                    String t;
+                    while(!stack.isEmpty() && ((t=stack.peek()).equals("-") || t.equals("+"))){
+                        out.add(stack.pop());
+                    }
+                    stack.push("-");
+                } else if (String.valueOf(s.charAt(i)).matches("[0-9]")) {
+                    if (isNum){
+                        String t = out.remove(out.size() - 1);
+                        out.add(t+s.charAt(i));
+                    } else {
+                        out.add(String.valueOf(s.charAt(i)));
+                    }
+                    isNum = true;
                 }
-            } else if ('+' == s.charAt(i)) {
-                isNum = false;
-                String t;
-                while(!stack.isEmpty() && ((t=stack.peek()).equals("-") || t.equals("+"))){
-                    out.add(stack.pop());
-                }
-                stack.push("+");
-            } else if ('-' == s.charAt(i)) {
-                isNum = false;
-                String t;
-                while(!stack.isEmpty() && ((t=stack.peek()).equals("-") || t.equals("+"))){
-                    out.add(stack.pop());
-                }
-                stack.push("-");
-            } else if (String.valueOf(s.charAt(i)).matches("[0-9]")) {
-                if (isNum){
-                    String t = out.remove(out.size() - 1);
-                    out.add(t+s.charAt(i));
-                } else {
-                    out.add(String.valueOf(s.charAt(i)));
-                }
-                isNum = true;
             }
-        }
-        while (!stack.isEmpty()){
-            out.add(stack.pop());
-        }
-
-        //计算后缀表达式的值
-        Stack<Integer> stackNum = new Stack<>();
-        for (String s1 : out) {
-            if (s1.matches("[0-9]+")) {
-                stackNum.push(Integer.parseInt(s1));
-            } else if ("+".equals(s1)){
-                Integer right = stackNum.pop();
-                Integer left = stackNum.pop();
-                stackNum.push(left+right);
-            } else if ("-".equals(s1)){
-                Integer right = stackNum.pop();
-                Integer left = stackNum.pop();
-                stackNum.push(left-right);
+            while (!stack.isEmpty()){
+                out.add(stack.pop());
             }
+
+            //计算后缀表达式的值
+            Stack<Integer> stackNum = new Stack<>();
+            for (String s1 : out) {
+                if (s1.matches("[0-9]+")) {
+                    stackNum.push(Integer.parseInt(s1));
+                } else if ("+".equals(s1)){
+                    Integer right = stackNum.pop();
+                    Integer left = stackNum.pop();
+                    stackNum.push(left+right);
+                } else if ("-".equals(s1)){
+                    Integer right = stackNum.pop();
+                    Integer left = stackNum.pop();
+                    stackNum.push(left-right);
+                }
+            }
+            return stackNum.pop();
         }
-        return stackNum.pop();
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+
+}

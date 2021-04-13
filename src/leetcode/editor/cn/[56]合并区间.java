@@ -1,4 +1,4 @@
-//给出一个区间的集合，请合并所有重叠的区间。 
+package leetcode.editor.cn;//给出一个区间的集合，请合并所有重叠的区间。
 //
 // 
 //
@@ -33,36 +33,42 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[][] merge(int[][] intervals) {
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[0] - o2[0];
-            }
-        });
-        List<Integer> list = new ArrayList<>();
-        for (int i = 1; i < intervals.length; i++) {
-            if (intervals[i-1][1] >= intervals[i][0]){
-                list.add(i-1);
-                if (intervals[i-1][0] < intervals[i][0]){
-                    intervals[i][0] = intervals[i-1][0];
-                }
-                if (intervals[i-1][1] > intervals[i][1]){
-                    intervals[i][1] = intervals[i-1][1];
-                }
-            }
-        }
-        List<int[]> rs = new ArrayList<>();
-        for (int i = 0; i < intervals.length; i++) {
-            if (!list.contains(i)){
-                rs.add(intervals[i]);
-            }
-        }
-        Object[] objects = rs.toArray();
-        int[][] ints = Arrays.copyOf(objects, objects.length, int[][].class);
-        return ints;
+class Merge {
+    public static void main(String[] args) {
+
     }
-}
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[][] merge(int[][] intervals) {
+            Arrays.sort(intervals, new Comparator<int[]>() {
+                @Override
+                public int compare(int[] o1, int[] o2) {
+                    return o1[0] - o2[0];
+                }
+            });
+            List<Integer> list = new ArrayList<>();
+            for (int i = 1; i < intervals.length; i++) {
+                if (intervals[i - 1][1] >= intervals[i][0]) {
+                    list.add(i - 1);
+                    if (intervals[i - 1][0] < intervals[i][0]) {
+                        intervals[i][0] = intervals[i - 1][0];
+                    }
+                    if (intervals[i - 1][1] > intervals[i][1]) {
+                        intervals[i][1] = intervals[i - 1][1];
+                    }
+                }
+            }
+            List<int[]> rs = new ArrayList<>();
+            for (int i = 0; i < intervals.length; i++) {
+                if (!list.contains(i)) {
+                    rs.add(intervals[i]);
+                }
+            }
+            Object[] objects = rs.toArray();
+            int[][] ints = Arrays.copyOf(objects, objects.length, int[][].class);
+            return ints;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
+}
+

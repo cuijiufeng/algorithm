@@ -45,33 +45,35 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-//Definition for a binary tree node.
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
+class FindBottomLeftValue{
+    //Definition for a binary tree node.
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int findBottomLeftValue(TreeNode root) {
-        List<TreeNode> t = null;
-        Queue<TreeNode> queue = new LinkedBlockingQueue<>();
-        queue.add(root);
-        while (!queue.isEmpty()){
-            t = new ArrayList<>(queue);
-            queue.clear();
-            for (TreeNode treeNode : t) {
-                if (treeNode.left != null){
-                    queue.add(treeNode.left);
-                }
-                if (treeNode.right != null){
-                    queue.add(treeNode.right);
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int findBottomLeftValue(TreeNode root) {
+            List<TreeNode> t = null;
+            Queue<TreeNode> queue = new LinkedBlockingQueue<>();
+            queue.add(root);
+            while (!queue.isEmpty()){
+                t = new ArrayList<>(queue);
+                queue.clear();
+                for (TreeNode treeNode : t) {
+                    if (treeNode.left != null){
+                        queue.add(treeNode.left);
+                    }
+                    if (treeNode.right != null){
+                        queue.add(treeNode.right);
+                    }
                 }
             }
+            return t.get(0).val;
         }
-        return t.get(0).val;
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}

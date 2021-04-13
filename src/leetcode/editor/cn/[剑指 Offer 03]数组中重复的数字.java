@@ -1,4 +1,4 @@
-//找出数组中重复的数字。 
+package leetcode.editor.cn;//找出数组中重复的数字。
 //
 // 
 //在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请
@@ -19,20 +19,25 @@
 // Related Topics 数组 哈希表 
 // 👍 183 👎 0
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int findRepeatNumber(int[] nums) {
-        byte[] bytes = new byte[100000];
-        for (int num : nums) {
-            bytes[num]++;
-        }
-        for (int i = 0; i < bytes.length; i++) {
-            if (bytes[i] > 1){
-                return i;
+class FindRepeatNumber {
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int findRepeatNumber(int[] nums) {
+            byte[] bytes = new byte[100000];
+            for (int num : nums) {
+                bytes[num]++;
             }
+            for (int i = 0; i < bytes.length; i++) {
+                if (bytes[i] > 1) {
+                    return i;
+                }
+            }
+            return nums[0];
         }
-        return nums[0];
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solution = new FindRepeatNumber().new Solution();
     }
 }
-//leetcode submit region end(Prohibit modification and deletion)

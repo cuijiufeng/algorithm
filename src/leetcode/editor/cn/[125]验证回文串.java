@@ -20,39 +20,44 @@ package leetcode.editor.cn;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class IsPalindrome {
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public boolean isPalindrome(String s) {
+            if (s == null || s.isEmpty()) {
+                return true;
+            }
+            if (s.length() == 1 || s.matches("[ ]*")) {
+                return true;
+            }
+            if (s.matches("[^a-zA-Z0-9]+")) {
+                return true;
+            }
+            int i = 0, j = s.length() - 1;
+            while (i < j) {
+                char ch1 = s.charAt(i++);
+                char ch2 = s.charAt(j--);
+                while (!(ch1 >= 'a' && ch1 <= 'z' || ch1 >= 'A' && ch1 <= 'Z' || ch1 >= '0' && ch1 <= '9')) {
+                    ch1 = s.charAt(i++);
+                }
+                while (!(ch2 >= 'a' && ch2 <= 'z' || ch2 >= 'A' && ch2 <= 'Z' || ch2 >= '0' && ch2 <= '9')) {
+                    ch2 = s.charAt(j--);
+                }
+                ch1 = (char) (ch1 & 0xDF);
+                ch2 = (char) (ch2 & 0xDF);
+                if (ch1 != ch2) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    //leetcode submit region end(Prohibit modification and deletion)
+    public static void main(String[] args) {
+        Solution solu = new IsPalindrome().new Solution();
         System.out.println(solu.isPalindrome(".,"));
     }
-    public boolean isPalindrome(String s) {
-        if (s==null || s.isEmpty()){
-            return true;
-        }
-        if(s.length()==1 || s.matches("[ ]*")){
-            return true;
-        }
-        if(s.matches("[^a-zA-Z0-9]+")){
-            return true;
-        }
-        int i=0, j = s.length()-1;
-        while(i<j){
-            char ch1 = s.charAt(i++);
-            char ch2 = s.charAt(j--);
-            while (!(ch1>='a' && ch1<='z' || ch1>='A' && ch1<='Z' || ch1>='0' && ch1<='9')){
-                ch1 = s.charAt(i++);
-            }
-            while (!(ch2>='a' && ch2<='z' || ch2>='A' && ch2<='Z' || ch2>='0' && ch2<='9')){
-                ch2 = s.charAt(j--);
-            }
-            ch1 = (char) (ch1 & 0xDF);
-            ch2 = (char) (ch2 & 0xDF);
-            if(ch1 != ch2){
-                return false;
-            }
-        }
-        return true;
-    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

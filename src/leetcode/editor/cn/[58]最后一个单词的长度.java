@@ -14,19 +14,23 @@ package leetcode.editor.cn;
 // 
 // Related Topics 字符串
 
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public static void main(String[] args){
-        Solution solu = new Solution();
+class LengthOfLastWord {
+    public static void main(String[] args) {
+        Solution solu = new LengthOfLastWord().new Solution();
         System.out.println(solu.lengthOfLastWord(" "));
     }
-    public int lengthOfLastWord(String s) {
-        String[] strs = s.split(" ");
-        if(strs.length==0){
-            return 0;
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+
+        public int lengthOfLastWord(String s) {
+            String[] strs = s.split(" ");
+            if (strs.length == 0) {
+                return 0;
+            }
+            return strs[strs.length - 1].length();
         }
-        return strs[strs.length-1].length();
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
+}
+
