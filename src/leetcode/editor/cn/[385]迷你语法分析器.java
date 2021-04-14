@@ -44,7 +44,7 @@ import java.util.Stack;
 
 class Deserialize{
     public static void main(String[] args){
-        Solution solu = new Deserialize1().new Solution();
+        Solution solu = new Deserialize().new Solution();
         solu.deserialize("[123,456,[788,799,833],[[]],10,[]]");
     }
     class NestedInteger {

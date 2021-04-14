@@ -24,8 +24,8 @@ class PreorderTraversal {
     //Definition for a binary tree node.
     class TreeNode {
         int val;
-        leetcode.editor.cn.TreeNode left;
-        leetcode.editor.cn.TreeNode right;
+        TreeNode left;
+        TreeNode right;
 
         TreeNode(int x) {
             val = x;
@@ -34,16 +34,16 @@ class PreorderTraversal {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public List<Integer> preorderTraversal(leetcode.editor.cn.TreeNode root) {
-            Stack<leetcode.editor.cn.TreeNode> stack = new Stack<>();
-            List<leetcode.editor.cn.TreeNode> list = new ArrayList<>();
+        public List<Integer> preorderTraversal(TreeNode root) {
+            Stack<TreeNode> stack = new Stack<>();
+            List<TreeNode> list = new ArrayList<>();
             while (root != null) {
                 list.add(root);
                 stack.push(root);
                 root = root.left;
             }
             while (!stack.isEmpty()) {
-                leetcode.editor.cn.TreeNode t = stack.pop();
+                TreeNode t = stack.pop();
                 if (t != null) {
                     t = t.right;
                     while (t != null) {
