@@ -54,8 +54,6 @@
 
 package leetcode.editor.cn;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 class MinimumRemoveToMakeValidParentheses {
