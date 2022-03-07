@@ -28,14 +28,9 @@ import java.lang.reflect.Method;
 public class ByteCodeTest {
     public static void main(String[] args) throws Exception {
         //调用方法生成代理对象
-        HelloTestTest proxyObj = (HelloTestTest) Proxy.newProxyInstance(HelloTestTest.class, new InvocationHandler() {
-            //实现回调方法
-            @Override
-            public void invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                //方法增强逻辑
-                System.out.println("hahahah");
-                return;
-            }
+        HelloTestTest proxyObj = (HelloTestTest) Proxy.newProxyInstance(HelloTestTest.class, (proxy, method, argus) -> {
+            //方法增强逻辑
+            System.out.println("hahahah");
         });
         proxyObj.sayHello();
     }
